@@ -1,0 +1,870 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="javascript: void(0);">Quản lý</a></li>
+                    <li class="breadcrumb-item ">Quản lý người dùng</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title">Quản lý người dùng</h4>
+                <p class="text-muted font-14">
+                    Quản lý các thông tin cơ bản của người dùng, phân quyền các chức năng tương ứng cho người dùng.
+                </p>
+                <ul class="nav nav-tabs nav-bordered mb-3">
+                    <li class="nav-item">
+                        <a href="#view_nd" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            Người dùng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#view_donvi" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                            Đơn vị
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="view_nd">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#add_new_nguoidung" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới người dùng</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_nguoidung" class="table dt-responsive nowrap w-100">
+                                <thead style="text-align:center">
+                                    <tr>
+                                        <th class="table-light">Mã người dùng</th>
+                                        <th class="table-light">Tên tài khoản</th>
+                                        <th class="table-light">Họ và tên</th>
+                                        <th class="table-light">Phân quyền</th>
+                                        <th class="table-light">Đơn vị</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody style="text-align:center">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane show" id="view_donvi">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="ThemMoi_DonVi" href="#" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới đơn vị</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+
+                        <div class="table-responsive-sm">
+                            <table id="table_donvi" class="table dt-responsive w-100">
+                                <thead style="text-align:center">
+                                    <tr>
+                                        <th class="table-light">Mã ĐV</th>
+                                        <th style="width:100px" class="table-light">Tên đơn vị</th>
+                                        <th class="table-light">Mô tả</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody style="text-align:center">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- modal add nguoi dung -->
+<div id="add_new_nguoidung" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal">Thêm mới người dùng</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="tdn" class="form-label">Tên đăng nhập: </label>
+                            <input type="text" id="TenDangNhap" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="mk" class="form-label">Mật khẩu: </label>
+                            <input type="password" id="MatKhau" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="hvt" class="form-label">Họ và tên: </label>
+                            <input type="text" id="HoVaTen" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="cd" class="form-label">Chức danh: </label>
+                            <input type="text" id="ChucDanh" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="sdt" class="form-label">Số điện thoại: </label>
+                            <input type="text" id="SoDienThoai" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="email" class="form-label">Email: </label>
+                            <input type="email" id="Email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Chọn phân quyền: </label>
+                            <select id="PhanQuyen" name="PhanQuyen" class="form-select">
+                                <option value="0">User</option>
+                                <option value="1">Admin</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="example-select" class="form-label">Chọn đơn vị: </label>
+                            <select id="MaDonVi" name="MaDonVi" class="form-select" id="example-select">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diachi" class="form-label">Địa chỉ: </label>
+                    <input type="diachi" id="DiaChi" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnThemMoi">Thêm mới</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal xem nguoi dung -->
+<div id="xem_nguoidung" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal">Xem người dùng</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="tdn" class="form-label">Tên đăng nhập: </label>
+                            <input type="text" readonly="" id="TenDangNhap_Xem" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="mk" class="form-label">Mật khẩu: </label>
+                            <input type="text" readonly="" id="MatKhau_Xem" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="hvt" class="form-label">Họ và tên: </label>
+                            <input type="text" readonly="" id="HoVaTen_Xem" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="cd" class="form-label">Chức danh: </label>
+                            <input type="text" readonly="" id="ChucDanh_Xem" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="sdt" class="form-label">Số điện thoại: </label>
+                            <input type="text" readonly="" id="SoDienThoai_Xem" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="email" class="form-label">Email: </label>
+                            <input type="email" readonly="" id="Email_Xem" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="cd" class="form-label">Phân quyền: </label>
+                            <input type="text" readonly="" id="PhanQuyen_Xem" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="cd" class="form-label">Đơn vị: </label>
+                            <input type="text" readonly="" id="MaDonVi_Xem" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diachi" class="form-label">Địa chỉ: </label>
+                    <input type="diachi" readonly="" id="DiaChi_Xem" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal sua nguoi dung -->
+<div id="sua_nguoidung" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal">Sửa người dùng</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="tdn" class="form-label">Tên đăng nhập: </label>
+                            <input type="text" id="TenDangNhap_Sua" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="mk" class="form-label">Mật khẩu: </label>
+                            <input type="password" id="MatKhau_Sua" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="hvt" class="form-label">Họ và tên: </label>
+                            <input type="text" id="HoVaTen_Sua" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="cd" class="form-label">Chức danh: </label>
+                            <input type="text" id="ChucDanh_Sua" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="sdt" class="form-label">Số điện thoại: </label>
+                            <input type="text" id="SoDienThoai_Sua" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="email" class="form-label">Email: </label>
+                            <input type="email" id="Email_Sua" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Chọn phân quyền: </label>
+                            <select id="PhanQuyen_Sua" name="PhanQuyen_Sua" class="form-select">
+                                <option value="0">User</option>
+                                <option value="1">Admin</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="example-select" class="form-label">Chọn đơn vị: </label>
+                            <select id="MaDonVi_Sua" name="MaDonVi_Sua" class="form-select" id="example-select">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diachi" class="form-label">Địa chỉ: </label>
+                    <input type="diachi" id="DiaChi_Sua" class="form-control">
+                </div>
+                <input type="hidden" id="MaND_Sua" class="form-control">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSua">Sửa</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- modal add  -->
+<div id="add_new_donvi" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal_DonVi"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <input type="hidden" id="ID_Hidden" value="" />
+                    <input type="hidden" id="CheDo_DonVi" value="" />
+                    <label id="Label_Ten" class="form-label">Tên đơn vị: </label>
+                    <input type="text" id="Ten_DonVi" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Mô tả:</label>
+                    <textarea class="form-control" id="MoTa" name="MoTa" rows="5"></textarea>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="btnSubmit_DonVi" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var Table_ND = $('#table_nguoidung').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+        var Table_DonVi = $('#table_donvi').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+        LoadData_NguoiDung(Table_ND);
+        LoadData_DonVi(Table_DonVi);
+        Load_Data_DSDonVi();
+
+        $(document).on('click', "a[name='Xem']", function () {
+            var ID_MaND = $(this).attr('id');
+            $.ajax({
+            url: '@Url.Action("Select_NguoiDung_By_MaND", "NguoiDung")',
+            type: 'get',
+            data: { MaND: ID_MaND},
+            success: function (data) {
+                    if (data.code == true) {
+                        $('#TenDangNhap_Xem').val(data.data[0].TenDangNhap);
+                        $('#MatKhau_Xem').val(data.data[0].MatKhau);
+                        $('#HoVaTen_Xem').val(data.data[0].HoVaTen);
+                        $('#ChucDanh_Xem').val(data.data[0].ChucDanh);
+                        $('#SoDienThoai_Xem').val(data.data[0].SoDienThoai);
+                        $('#Email_Xem').val(data.data[0].Email);
+                        if (data.data[0].PhanQuyen == 0) {
+                            $('#PhanQuyen_Xem').val("User");
+                        } else {
+                            $('#PhanQuyen_Xem').val("Admin");
+                        }
+
+                        $('#MaDonVi_Xem').val(data.data[0].TenDV);
+                        $('#DiaChi_Xem').val(data.data[0].DiaChi);
+                        $("#xem_nguoidung").modal("show");
+
+                    } else {
+                     alert(data.msg);
+                    }
+                }
+            });
+        })
+
+        $(document).on('click', "a[name='Sua']", function () {
+            var ID_MaND = $(this).attr('id');
+            $.ajax({
+            url: '@Url.Action("Select_NguoiDung_By_MaND", "NguoiDung")',
+            type: 'get',
+            data: { MaND: ID_MaND},
+            success: function (data) {
+                    if (data.code == true) {
+                        $('#TenDangNhap_Sua').val(data.data[0].TenDangNhap);
+                        $('#MatKhau_Sua').val(data.data[0].MatKhau);
+                        $('#HoVaTen_Sua').val(data.data[0].HoVaTen);
+                        $('#ChucDanh_Sua').val(data.data[0].ChucDanh);
+                        $('#SoDienThoai_Sua').val(data.data[0].SoDienThoai);
+                        $('#Email_Xem').val(data.data[0].Email);
+                        $('#PhanQuyen_Sua option[value=' + data.data[0].PhanQuyen+']').attr('selected', 'selected');
+                        $('#MaDonVi_Sua option[value=' + data.data[0].MaDV + ']').attr('selected', 'selected');
+                        $('#DiaChi_Xem').val(data.data[0].DiaChi);
+                        $("#MaND_Sua").val(data.data[0].MaND);
+                        $("#sua_nguoidung").modal("show");
+
+                    } else {
+                     alert(data.msg);
+                    }
+                }
+            });
+        })
+
+        $(document).on('click', "a[name='Xoa']", function () {
+            var ID_MaND = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_NguoiDung", "NguoiDung")',
+                type: 'POST',
+                 data: { MaND: ID_MaND},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_NguoiDung(Table_ND);
+                        ThongBao("Thông báo", "Xóa người dùng");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+        $(document).on('click', "button[id='btnThemMoi']", function () {
+            var TDN = $("#TenDangNhap").val();
+            var MatKhau = $("#MatKhau").val();
+            var HoTen = $("#HoVaTen").val();
+            var ChucDanh = $("#ChucDanh").val();
+            var SDT = $("#SoDienThoai").val();
+            var Email = $("#Email").val();
+            var PhanQuyen = $("#PhanQuyen").val();
+            var ChonDonVi = $("#MaDonVi").val();
+            var DiaChi = $("#DiaChi").val();
+            var themmoi = Them_NguoiDung(ChonDonVi, TDN, MatKhau, HoTen, ChucDanh, PhanQuyen, SDT, Email, DiaChi);
+            if (themmoi == true) {
+                setTimeout(function () {
+                    LoadData_NguoiDung(Table_ND);
+                    ThongBao("Thành công", "Thêm mới thành công");
+                }, 100);
+            } else {
+                ThongBao("Thất bại", "Thêm mới không thành công !!");
+            }
+        })
+
+        $(document).on('click', "button[id='btnSua']", function () {
+            var MaND = $("#MaND_Sua").val();
+            var TDN = $("#TenDangNhap_Sua").val();
+            var MatKhau = $("#MatKhau_Sua").val();
+            var HoTen = $("#HoVaTen_Sua").val();
+            var ChucDanh = $("#ChucDanh_Sua").val();
+            var SDT = $("#SoDienThoai_Sua").val();
+            var Email = $("#Email_Sua").val();
+            var PhanQuyen = $("#PhanQuyen_Sua").val();
+            var ChonDonVi = $("#MaDonVi_Sua").val();
+            var DiaChi = $("#DiaChi_Sua").val();
+            var update_nd = Sua_NguoiDung(MaND, ChonDonVi, TDN, MatKhau, HoTen, ChucDanh, PhanQuyen, SDT, Email, DiaChi);
+            if (update_nd == true) {
+                setTimeout(function () {
+                    LoadData_NguoiDung(Table_ND);
+                    ThongBao("Thành công", "Update người dùng thành công");
+                }, 100);
+            } else {
+                ThongBao("Thất bại", "Update không thành công !!");
+            }
+        })
+
+
+
+
+        $(document).on('click', "a[id='ThemMoi_DonVi']", function () {
+            $("#Ten_DonVi").val("");
+            $("#MoTa").val("");
+            $("#CheDo_DonVi").val("ThemMoiDonVi");
+            $("#btnSubmit_DonVi").text("Thêm mới");
+            $('#TieuDe_Modal_DonVi').text("Thêm mới đơn vị");
+            $("#add_new_donvi").modal("show");
+        })
+
+        $(document).on('click', "a[name='Sua_DonVi']", function () {
+            var ID_Hidden = $(this).attr('id');
+            $("#Ten_DonVi").val("");
+            $("#MoTa").val("");
+            $("#CheDo_DonVi").val("SuaDonVi");
+            $("#btnSubmit_DonVi").text("Sửa");
+            $('#TieuDe_Modal_DonVi').text("Sửa đơn vị");
+            $.ajax({
+            url: '@Url.Action("Select_DonVi_By_MaDonVi", "DonVi")',
+            type: 'get',
+            data: { MaDV: ID_Hidden},
+            success: function (data) {
+                if (data.code == true) {
+                        $('#Ten_DonVi').val(data.data[0].TenDV);
+                        $('#MoTa').val(data.data[0].MoTa);
+                        $('#ID_Hidden').val(ID_Hidden);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+
+
+            $("#add_new_donvi").modal("show");
+        })
+
+        $(document).on('click', "a[name='Xoa_DonVi']", function () {
+            var ID = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_DonVi", "DonVi")',
+                type: 'POST',
+                 data: { MaDV: ID},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_DonVi(Table_DonVi);
+                        ThongBao("Thông báo", "Xóa thành công");
+                    } else {
+                        ThongBao("Thông báo", "Có lỗi khi xóa");
+                    }
+                }
+            });
+        })
+
+
+
+        $(document).on('click', "button[id='btnSubmit_DonVi']", function () {
+            var chedo = $("#CheDo_DonVi").val();
+            var TenDonVi = $("#Ten_DonVi").val();
+            var MoTa = $("#MoTa").val();
+            if (chedo == "ThemMoiDonVi") {
+                var themmoi = Them_DonVi(TenDonVi, MoTa);
+                if (themmoi == true) {
+                    setTimeout(function () {
+                        LoadData_DonVi(Table_DonVi);
+                        ThongBao("Thành công", "Thêm mới thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                }
+            } else if (chedo == "SuaDonVi") {
+                var ID_Hidden = $("#ID_Hidden").val();
+                var update_dv = Sua_DonVi(ID_Hidden, TenDonVi, MoTa);
+                if (update_dv == true) {
+                    setTimeout(function () {
+                        LoadData_DonVi(Table_DonVi);
+                        ThongBao("Thành công", "Cập nhật thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Cập nhật không thành công !!");
+                }
+
+            }
+        })
+
+
+
+
+})
+
+
+
+
+
+
+function LoadData_NguoiDung(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    var show_pq = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_NguoiDung", "NguoiDung")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                if (item.PhanQuyen == 1) {
+                    show_pq = "Admin";
+                } else {
+                    show_pq = "User";
+                }
+                Name_DataTable.row.add([
+                    '<a class="text-body fw-bold">#' + item.MaND+'</a>',
+                    '<h4><span class="badge bg-secondary text-light">' + item.TenDangNhap + '</span></h4>',
+                    '<h4><span class="badge bg-warning text-light">' + item.HoVaTen+'</span></h4>',
+                    '<h4><span class="badge bg-danger text-light">' + show_pq + '</span></h4>',
+                    item.TenDV,
+                    '<a href="javascript:void(0)" name = "Xem" id = "' + item.MaND + '" class="action-icon"> <i class="mdi mdi-eye"></i></a>' +
+                    '<a href="javascript:void(0)" name = "Sua" id = "' + item.MaND + '" class= "action-icon" > <i class="mdi mdi-pencil"></i></a >'+
+                    '<a href="javascript:void(0)" name = "Xoa" id = "' + item.MaND + '" class= "action-icon" > <i class="mdi mdi-delete"></i></a>'
+
+                ]).draw(false);
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+
+function LoadData_DonVi(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    var show_pq = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_DonVi", "DonVi")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                if (item.PhanQuyen == 1) {
+                    show_pq = "Admin";
+                } else {
+                    show_pq = "User";
+                }
+                Name_DataTable.row.add([
+                    '<a class="text-body fw-bold">#' + item.MaDV+'</a>',
+                    item.TenDV,
+                    item.MoTa,
+                    '<a href="javascript:void(0)" name = "Sua_DonVi" id = "' + item.MaDV + '" class= "action-icon" > <i class="mdi mdi-pencil"></i></a >'+
+                    '<a href="javascript:void(0)" name = "Xoa_DonVi" id = "' + item.MaDV + '" class= "action-icon" > <i class="mdi mdi-delete"></i></a>'
+
+                ]).draw(false);
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+    }
+
+
+function Load_Data_DSDonVi() {
+    var Get_DSDonVi = Get_Data_DonVi();
+    if (Get_DSDonVi != "Error_Get_Data_DSTaiSan") {
+        $("#MaDonVi").empty();
+        $('#MaDonVi').append($('<option>', { value: "Chọn đơn vị....", text: "Chọn đơn vị...." }));
+        $.each(Get_DSDonVi.data, function (i, item) {
+            $('#MaDonVi').append($('<option>', { value: item.MaDV, text: item.TenDV }));
+            $('#MaDonVi_Sua').append($('<option>', { value: item.MaDV, text: item.TenDV }));
+        });
+    }
+    }
+
+
+function Get_Data_DonVi() {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_DonVi", "DonVi")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_DonVi";
+        }
+    });
+    return result;
+    }
+
+
+function Them_DonVi(TenDV, MoTa) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_DonVi", "DonVi")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            TenDV: TenDV,
+            MoTa: MoTa
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+
+function Them_NguoiDung(MaDV, TenDangNhap, MatKhau, HoVaTen, ChucDanh, PhanQuyen, SoDienThoai, Email, DiaChi) {
+        var rt = false;
+        $.ajax({
+            url: '@Url.Action("Insert_NguoiDung", "NguoiDung")',
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({
+                MaDV: MaDV,
+                TenDangNhap: TenDangNhap,
+                MatKhau: MatKhau,
+                HoVaTen: HoVaTen,
+                ChucDanh: ChucDanh,
+                PhanQuyen: PhanQuyen,
+                SoDienThoai: SoDienThoai,
+                Email: Email,
+                DiaChi: DiaChi
+            }),
+            async: false,
+            cache: false,
+            success: function (data) {
+                if (data.code == true) {
+                    rt = true;
+                } else {
+                    rt = false;
+                }
+            },
+            error: function (xhr) {
+                alert("Error_Load_Data");
+            }
+        })
+        return rt;
+    }
+
+
+function Sua_NguoiDung(MaND, MaDV, TenDangNhap, MatKhau, HoVaTen, ChucDanh, PhanQuyen, SoDienThoai, Email, DiaChi) {
+        var rt = false;
+        $.ajax({
+            url: '@Url.Action("Update_NguoiDung", "NguoiDung")',
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({
+                MaND: MaND,
+                MaDV: MaDV,
+                TenDangNhap: TenDangNhap,
+                MatKhau: MatKhau,
+                HoVaTen: HoVaTen,
+                ChucDanh: ChucDanh,
+                PhanQuyen: PhanQuyen,
+                SoDienThoai: SoDienThoai,
+                Email: Email,
+                DiaChi: DiaChi
+            }),
+            async: false,
+            cache: false,
+            success: function (data) {
+                if (data.code == true) {
+                    rt = true;
+                } else {
+                    rt = false;
+                }
+            },
+            error: function (xhr) {
+                alert("Error_Load_Data");
+            }
+        })
+        return rt;
+    }
+
+
+function Sua_DonVi(MaDV, TenDV, MoTa) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_DonVi", "DonVi")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaDV: MaDV,
+            TenDV: TenDV,
+            MoTa: MoTa
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+    }
+
+
+
+function ThongBao(title, content) {
+    $.alert({
+        title: title,
+        theme: 'dark',
+        content: content,
+    });
+    }
+
+
+</script>

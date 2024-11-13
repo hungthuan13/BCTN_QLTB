@@ -1,0 +1,85 @@
+﻿* {
+    padding: 0px;
+    margin: 0px;
+}
+
+header {
+    background-color: #0a8cd7;
+    height: 100px;
+}
+
+.search {
+    width: 310px;
+    height: 45px;
+    align-items: center;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: inset 0 5px 5px #2177a8, 0 -5px 10px #1890d4, inset 0 -5px 5px #2e90c8, 0 10px 20px #227bad;
+    transition: 1s;
+    margin-left: 350px;
+}
+
+.search_icon {
+    font-size: 20px;
+}
+
+.search > i {
+    padding: 10px;
+    color: aliceblue;
+}
+
+.input_search {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 220px;
+    padding: 0 20px;
+    border-radius: 5px;
+    font-size: 1.7rem;
+    color: white;
+}
+
+    .input_search ~ a {
+        opacity: 0;
+        transition: 0.5s;
+        transform: translate(50px);
+    }
+
+    .input_search:valid ~ a {
+        opacity: 1;
+        transform: translate(0px);
+    }
+
+    .input_search:valid {
+        overflow: hidden;
+    }
+
+.input_search_icon {
+    padding: 8px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.Login {
+    position: relative;
+}
+
+.login_icon {
+    padding-right: 7px;
+    color: #fff;
+}
+
+.icon_size {
+    font-size: 30px;
+}
+
+.card.card-tale {
+    background: #7DA0FA;
+    color: #ffffff;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}

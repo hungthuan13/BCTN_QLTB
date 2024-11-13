@@ -1,0 +1,1589 @@
+﻿
+@{
+    ViewBag.Title = "Invoice_2";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Invoice</title>
+    <link rel="icon" type="image/png" href="~/Content/Hinh/icon_tdmu.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<style>
+    tr {
+        mso-height-source: auto;
+        mso-ruby-visibility: none;
+    }
+
+    col {
+        mso-width-source: auto;
+        mso-ruby-visibility: none;
+    }
+
+    br {
+        mso-data-placement: same-cell;
+    }
+
+    ruby {
+        ruby-align: left;
+    }
+
+    .style0 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Calibri","sans-serif";
+        mso-protection: locked visible;
+        mso-style-name: Normal;
+        mso-style-id: 0;
+    }
+
+    .font2 {
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+    }
+
+    .font3 {
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+    }
+
+    .font4 {
+        color: #000000;
+        font-size: 9pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+    }
+
+    td {
+        mso-style-parent: style0;
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Calibri","sans-serif";
+        mso-protection: locked visible;
+        mso-ignore: padding;
+    }
+
+    .x15 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Calibri","sans-serif";
+        mso-protection: locked visible;
+    }
+
+    .x64 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x65 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x66 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x67 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x68 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x69 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x70 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x71 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x72 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x73 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x74 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x75 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x76 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x77 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x78 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x79 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x80 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: italic;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x81 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: italic;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x82 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x83 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x84 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x85 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x86 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x87 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x88 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x89 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x90 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x91 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x92 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x93 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x94 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x95 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x96 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x97 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x98 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x99 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x100 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x101 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x102 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x103 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x104 {
+        mso-number-format: General;
+        text-align: general;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x105 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x106 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x107 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x108 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x109 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 12pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x110 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: none;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x111 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: none;
+        border-bottom: 1px solid windowtext;
+        border-left: none;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x112 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: none;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x113 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: none;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x114 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: none;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x115 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: none;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x116 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: none;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x117 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x118 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: bottom;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 700;
+        font-style: italic;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x119 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 12pt;
+        font-weight: 700;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        mso-protection: locked visible;
+    }
+
+    .x120 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: none;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x121 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: none;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x122 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: none;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x123 {
+        mso-number-format: General;
+        text-align: left;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: none;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x124 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: none;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x125 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: none;
+        border-bottom: 1px solid windowtext;
+        border-left: none;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x126 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: none;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x127 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: 1px solid windowtext;
+        border-right: 1px solid windowtext;
+        border-bottom: none;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    .x128 {
+        mso-number-format: General;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background: auto;
+        mso-pattern: auto;
+        color: #000000;
+        font-size: 11pt;
+        font-weight: 400;
+        font-style: normal;
+        font-family: "Times New Roman","serif";
+        border-top: none;
+        border-right: 1px solid windowtext;
+        border-bottom: 1px solid windowtext;
+        border-left: 1px solid windowtext;
+        mso-diagonal-down: none;
+        mso-diagonal-up: none;
+        mso-protection: locked visible;
+    }
+
+    #section {
+        overflow: none;
+        height: expression(window.screen.height - 39);
+        width: window.screen.width;
+        float: left;
+        padding: 10px;
+    }
+
+    .push {
+        width: 1px;
+        height: 31px;
+        clear: both;
+    }
+
+    #footer {
+        background-color: #808080;
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        position: fixed;
+        bottom: 0px;
+    }
+</style>
+
+
+<div id='table_0' sheetName='TSCĐ'>
+    <body link='blue' vlink='purple' class='x65'>
+
+        <table id="invoice" border='0' cellpadding='0' cellspacing='0' width='993' style='border-collapse:collapse;table-layout:fixed;width:744pt'>
+            <col class='x75' width='27' style='mso-width-source:userset;background:none;width:20.25pt'>
+            <col class='x65' width='146' style='mso-width-source:userset;background:none;width:109.5pt'>
+            <col class='x65' width='136' style='mso-width-source:userset;background:none;width:102pt'>
+            <col class='x65' width='64' span='4' style='mso-width-source:userset;background:none;width:48pt'>
+            <col class='x65' width='69' style='mso-width-source:userset;background:none;width:51.75pt'>
+            <col class='x65' width='62' style='mso-width-source:userset;background:none;width:46.5pt'>
+            <col class='x65' width='58' style='mso-width-source:userset;background:none;width:43.5pt'>
+            <col class='x65' width='54' style='mso-width-source:userset;background:none;width:40.5pt'>
+            <col class='x65' width='53' style='mso-width-source:userset;background:none;width:39.75pt'>
+            <col class='x65' width='51' style='mso-width-source:userset;background:none;width:38.25pt'>
+            <col class='x65' width='81' style='mso-width-source:userset;background:none;width:60.75pt'>
+            <tr height='20' class='x64' style='mso-height-source:userset;height:15pt'>
+                <td height='20' class='x66' width='27' style='height:15pt;width:20.25pt;'></td>
+                <td colspan='2' class='x84' width='282' style='mso-ignore:colspan;'>Đơn vị: Trường Đại học Thủ Dầu Một</td>
+                <td colspan='6' class='x64' width='387' style='mso-ignore:colspan;'></td>
+                <td colspan='4' class='x64' width='239' style='mso-ignore:colspan;'></td>
+            </tr>
+            <tr height='20' style='mso-height-source:userset;height:15pt'>
+                <td height='20' class='x82' style='height:15pt;'></td>
+                <td colspan='2' class='x86' style='mso-ignore:colspan;'><font class="font2" style="text-decoration: none;">Bộ phận:&nbsp;</font><font class="font3" style="text-decoration: none;">Phòng cơ sở vật chất</font></td>
+                <td colspan='6' class='x65' style='mso-ignore:colspan;'></td>
+                <td colspan='4' class='x65' style='mso-ignore:colspan;'></td>
+            </tr>
+            <tr height='20' style='mso-height-source:userset;height:15pt'>
+                <td height='20' class='x75' style='height:15pt;'></td>
+                <td colspan='2' class='x85' style='mso-ignore:colspan;'><font class="font2" style="text-decoration: none;">Mã đơn vị SDNS</font><font class="font3" style="text-decoration: none;">: …………….</font></td>
+                <td colspan='6' class='x65' style='mso-ignore:colspan;'></td>
+                <td colspan='4' class='x65' style='mso-ignore:colspan;'></td>
+            </tr>
+            <tr height='20' style='mso-height-source:userset;height:15pt'>
+                <td height='20' class='x75' style='height:15pt;'></td>
+                <td colspan='13' class='x65' style='mso-ignore:colspan;'></td>
+            </tr>
+            <tr height='21' style='mso-height-source:userset;height:15.75pt'>
+                <td colspan='14' height='21' class='x109' style='height:16pt;'>BIÊN BẢN KIỂM KÊ TÀI SẢN</td>
+            </tr>
+            <tr height='20' style='mso-height-source:userset;height:15pt'>
+                <td height='20' class='x75' style='height:15pt;'></td>
+                <td colspan='10' class='x68' style='mso-ignore:colspan;'></td>
+                <td class='x73'><div style='margin-left:-23px'>Số: ………………..</div></td>
+                <td colspan='2' class='x65' style='mso-ignore:colspan;'></td>
+            </tr>
+            <tr height='20' style='mso-height-source:userset;height:15pt'>
+                <td height='20' class='x75' style='height:15pt;'></td>
+                <td class='x68'>Ban kiểm kê gồm:</td>
+                <td colspan='12' class='x68' style='mso-ignore:colspan;'></td>
+            </tr>
+
+            
+          
+
+
+            
+           
+
+          
+
+           
+
+
+
+
+
+
+
+
+         
+
+        </table>
+
+    </body>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const MaPhieu = urlParams.get('MaPhieu');
+
+        Show_BanKiemKe(MaPhieu);
+        Show_ChiTietPhieuKiem(MaPhieu);
+
+        window.print();
+
+    })
+
+function Show_ChiTietPhieuKiem(MaPhieu) {
+    var stt = 1;
+    var tong_sl = 0;
+    var tong_sl_tt = 0;
+    var tong_contot = 0;
+    var tong_kempc = 0;
+    var tong_matpc = 0;
+    var Get_CTPhieuKiem = Get_Data_CTPhieuKiem(MaPhieu);
+    if (Get_CTPhieuKiem != "Error_Get_Data_CTPhieuKiem") {
+
+
+
+        $('#invoice').append(
+            "<tr height='20' style='mso-height-source:userset;height:15pt'>" +
+            "<td rowspan='2' height='79' class='x120' style='border-bottom:1px solid windowtext;height:59.25pt;'>Số TT</td>" +
+            "<td rowspan='2' height='79' class='x122' style='border-bottom:1px solid windowtext;height:59.25pt;'>Tên công cụ dụng cụ</td>" +
+            "<td rowspan='2' height='79' class='x120' style='border-bottom:1px solid windowtext;height:59.25pt;'>Mã số CCDC</td>" +
+            "<td rowspan='2' height='79' class='x120' style='border-bottom:1px solid windowtext;height:59.25pt;'>Năm sử dụng</td>" +
+            "<td colspan='2' class='x124' style='border-bottom:1px solid windowtext;'>Theo sổ kế toán</td>" +
+            "<td colspan='2' class='x124' style='border-bottom:1px solid windowtext;'>Theo sổ kiểm kê</td>" +
+            "<td colspan='3' class='x124' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;'>Phẩm chất</td>" +
+            "<td rowspan='2' height='79' class='x127' style='border-bottom:1px solid windowtext;height:59.25pt;'>Ghi chú</td>" +
+            "</tr>" +
+            "<tr height='60' style='mso-height-source:userset;height:45pt'>" +
+            "<td class='x98'>Đơn vị tính</td>" +
+            "<td class='x98'>Số lượng</td>" +
+            "<td class='x98'>Đơn vị tính</td>" +
+            "<td class='x98'>Số lượng</td>" +
+            "<td class='x98'>Còn tốt</td>" +
+            "<td class='x98'>Kém phẩm chất</td>" +
+            "<td class='x98'>Mất phẩm chất</td>" +
+            "</tr>"
+        );
+
+
+       
+
+
+
+
+
+
+
+        $.each(Get_CTPhieuKiem.data, function (i, item) {
+            tong_sl += item.SoLuong;
+            tong_sl_tt += item.SoLuongThucTe;
+            tong_contot += item.ConTot;
+            tong_kempc += item.KemPC;
+            tong_matpc += item.MatPC;
+
+
+
+
+            $('#invoice').append(
+                "<tr height='20' style='mso-height-source:userset;height:15pt'>" +
+                "<td height='18' class='x98' style='height:13.5pt;'>"+ stt++ +"</td>" +
+                "<td class='x99'>"+item.TenTS+"</td>" +
+                "<td class='x98'></td>" +
+                "<td class='x98'></td>" +
+                "<td class='x100'>Cái</td>" +
+                "<td class='x98'>" + item.SoLuong +"</td>" +
+                "<td class='x98'>Cái</td>" +
+                "<td class='x98'>" + item.SoLuongThucTe +"</td>" +
+                "<td class='x98'>" + item.ConTot +"</td>" +
+                "<td class='x98'>" + item.KemPC +"</td>" +
+                "<td class='x98'>" + item.MatPC +"</td>" +
+                "<td class='x98'>" + item.GhiChu +"</td>" +
+                "</tr>"
+            );
+        });
+
+
+
+
+
+        $('#invoice').append(
+            "<tr height='20' style='mso-height-source:userset;height:15pt'>" +
+            "<td height='18' class='x103' style='height:13.5pt;'></td>" +
+            "<td class='x107'>Cộng</td>" +
+            "<td class='x108'></td>" +
+            "<td class='x108'></td>" +
+            "<td class='x108'></td>" +
+            "<td class='x108'><b>" + tong_sl + "</b></td>" +
+            "<td class='x108'></td>" +
+            "<td class='x108'><b>" + tong_sl_tt + "</td>" +
+            "<td class='x108'><b>" + tong_contot + "</td>" +
+            "<td class='x108'><b>" + tong_kempc + "</td>" +
+            "<td class='x108'><b>" + tong_matpc + "</td>" +
+            "<td class='x108'></td>" +
+            "</tr>"
+        );
+
+
+
+    } else {
+
+    }
+}
+
+function Show_BanKiemKe(MaPhieu) {
+    var Get_BanKK = Get_Data_BanKiemKe(MaPhieu);
+    if (Get_BanKK != "Error_Get_Data_CTPhieuKiem") {
+        $.each(Get_BanKK.data, function (i, item) {
+            $('#invoice').append(
+                "<tr height='20' style='mso-height-source:userset;height:15pt'>" +
+                "<td height='20' class='x75' style='height:15pt;'></td>" +
+                "<td colspan='7' class='x69' style='mso-ignore:colspan;'>- " + item.HoVaTen + "; Chức vụ: " + item.ChucVu + "; Đại diện: " + item.TenDV +"</td>" +
+                "<td colspan='6' class='x68' style='mso-ignore:colspan;'></td>" +
+                "</tr>"
+            );
+        });
+
+        $('#invoice').append(
+            "<tr height='20' style='mso-height-source:userset;height:15pt'>" +
+            "<td height='20' class='x75' style='height:15pt;'></td>" +
+            "<td colspan='2' class='x87' style='mso-ignore:colspan;'>Đã kiểm kê TSCĐ, kết quả như sau:</td>" +
+            "<td colspan='11' class='x68' style='mso-ignore:colspan;'></td>" +
+            "</tr>"
+        );
+       
+
+    } else {
+    }
+}
+function Get_Data_CTPhieuKiem(MaPhieu) {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_ChiTietPhieuKiemKe", "KiemKe")',
+        dataType: 'json',
+        data: { MaPhieu: MaPhieu },
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_CTPhieuKiem";
+        }
+    });
+    return result;
+}
+
+function Get_Data_BanKiemKe(MaPhieu) {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_BanKiemKe", "BanKiemKe")',
+        dataType: 'json',
+        data: { MaPhieu: MaPhieu },
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_BanKiemKe";
+        }
+    });
+    return result;
+}
+
+</script>

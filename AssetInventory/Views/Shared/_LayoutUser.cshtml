@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" type="image/png" href="~/Content/Hinh/icon_tdmu.png">
+    <link rel="stylesheet" href="~/Content/Content_TrangChu/boostrapTDMU.css" />
+    <link rel="stylesheet" href="~/Content/Content_TrangChu/login.css" />
+    <link rel="stylesheet" href="~/Content/Content_TrangChu/index.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <header class="d-flex">
+            <div class="container d-flex align-items-center">
+                <div id="logo">
+                    <a href="#" class="the-a-full">
+                        <img style="height: 100px;" class="img-fluid" src="https://vienktcn.tdmu.edu.vn/img/1/Result/Images/LOGO-CHU-NEW.png">
+                    </a>
+                </div>
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass search_icon"></i>
+                    <input class="input_search" text="text">
+                    <a href="#">
+                        <i class="fa-solid fa-arrow-right search_icon input_search_icon"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div>
+        @Html.Action("NavPartial", "TrangChu")
+    </div>
+
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+
+
+    <div>
+        @Html.Action("FooterPartial","TrangChu")
+    </div>
+</body>
+</html>

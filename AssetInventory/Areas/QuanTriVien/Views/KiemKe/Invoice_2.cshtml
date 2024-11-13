@@ -1,0 +1,230 @@
+﻿
+
+
+
+
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Invoice</title>
+    <link rel="icon" type="image/png" href="~/Content/Hinh/icon_tdmu.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<style>
+    table, td, th {
+        border: 1px solid;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+</style>
+
+<body>
+    <div>
+        <table id="invoice">
+
+            <caption><center><h3>BIÊN BẢN KIỂM KÊ CÔNG CỤ DỤNG CỤ VÀ TÀI SẢN CỐ ĐỊNH</h3></center></caption>
+            <caption id="BanKiemKe_Show" style="text-align:left">
+                Ban kiểm kê gồm:		<br>
+
+
+
+            </caption>
+
+
+            <tr style="text-align:center">
+                <td rowspan="2">Số TT</td>
+                <td rowspan="2">Tên công cụ dụng cụ</td>
+                <td rowspan="2">Mã số CCDC</td>
+                <td rowspan="2">Năm sử dụng</td>
+                <td colspan="2">Theo sổ kế toán</td>
+                <td colspan="2">Theo sổ kiểm kê</td>
+                <td colspan="3">Phẩm chất</td>
+                <td rowspan="2">Ghi chú</td>
+            </tr>
+            <tr style="text-align:center">
+
+                <td>Đơn vị tính</td>
+                <td>Số lượng</td>
+                <td>Đơn vị tính</td>
+                <td>Số lượng</td>
+                <td>Còn tốt</td>
+                <td>Kém phẩm chất</td>
+                <td>Mất phẩm chất</td>
+            </tr>
+
+
+
+        </table>
+        <div id="BanKiemKe_Show_1" style="text-align: center; text-indent: 150px; float:left">
+            <b><p>Ban kiểm kê</p></b>
+        </div>
+
+
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const MaPhieu = urlParams.get('MaPhieu');
+
+        Show_ChiTietPhieuKiem(MaPhieu);
+        Show_BanKiemKe(MaPhieu);
+
+        window.print();
+
+    })
+
+function Show_ChiTietPhieuKiem(MaPhieu) {
+    var stt = 1;
+    var tong_sl = 0;
+    var tong_sl_tt = 0;
+    var tong_contot = 0;
+    var tong_kempc = 0;
+    var tong_matpc = 0;
+    var Get_CTPhieuKiem = Get_Data_CTPhieuKiem(MaPhieu);
+    if (Get_CTPhieuKiem != "Error_Get_Data_CTPhieuKiem") {
+        $.each(Get_CTPhieuKiem.data, function (i, item) {
+            tong_sl += item.SoLuong;
+            tong_sl_tt += item.SoLuongThucTe;
+            tong_contot += item.ConTot;
+            tong_kempc += item.KemPC;
+            tong_matpc += item.MatPC;
+            $('#invoice').append(
+                '<tr style="text-align:center">' +
+                '<td>'+ stt++ +'</td>' +
+                '<td>'+item.TenTS+'</td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td>Cái</td>' +
+                '<td>' + item.SoLuong +'</td>' +
+                '<td>Cái</td>' +
+                '<td>' + item.SoLuongThucTe +'</td>' +
+                '<td>' + item.ConTot +'</td>' +
+                '<td>' + item.KemPC +'</td>' +
+                '<td>' + item.MatPC +'</td>' +
+                '<td>' + item.GhiChu +'</td>' +
+                '</tr>'
+            );
+        });
+        $('#invoice').append(
+            '<tr style="text-align:center">' +
+            '<td></td>' +
+            '<td><b>Cộng</b></td>' +
+            '<td></td>' +
+            '<td></td>' +
+            '<td></td>' +
+            '<td><b>' + tong_sl + '</b></td>' +
+            '<td></td>' +
+            '<td><b>' + tong_sl_tt + '</b></td>' +
+            '<td><b>' + tong_contot + '</b></td>' +
+            '<td><b>' + tong_kempc + '</b></td>' +
+            '<td><b>' + tong_kempc + '</b></td>' +
+            '<td></td>' +
+            '</tr>'
+        );
+
+
+
+    } else {
+
+    }
+}
+
+function Show_BanKiemKe(MaPhieu) {
+    var iii = 1;
+    var Get_BanKK = Get_Data_BanKiemKe(MaPhieu);
+    if (Get_BanKK != "Error_Get_Data_CTPhieuKiem") {
+        $.each(Get_BanKK.data, function (i, item) {
+
+            $('#BanKiemKe_Show').append(' - Ông ' + item.HoVaTen + '; Chức vụ: ' + item.ChucVu + '; Đại diện: ' + item.TenDV+'<br>');
+            $('#BanKiemKe_Show_1').append('<b><p>' + item.HoVaTen + '</p></b>');
+
+
+        });
+        $('#BanKiemKe_Show').append('<b>Đã kiểm kê TSCĐ, kết quả như sau:</b>	<br>');
+
+
+    } else {
+    }
+}
+function Get_Data_CTPhieuKiem(MaPhieu) {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_ChiTietPhieuKiemKe", "KiemKe")',
+        dataType: 'json',
+        data: { MaPhieu: MaPhieu },
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_CTPhieuKiem";
+        }
+    });
+    return result;
+}
+
+function Get_Data_BanKiemKe(MaPhieu) {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_BanKiemKe", "BanKiemKe")',
+        dataType: 'json',
+        data: { MaPhieu: MaPhieu },
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_BanKiemKe";
+        }
+    });
+    return result;
+}
+
+</script>

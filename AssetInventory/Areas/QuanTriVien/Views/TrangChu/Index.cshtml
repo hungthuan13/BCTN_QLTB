@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+
+}
+
+
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Trang tổng quan</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Trang tổng quan</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card widget-inline">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="card shadow-none m-0">
+                                <div class="card-body text-center">
+                                    <i class="dripicons-archive text-muted" style="font-size: 24px;"></i>
+                                    <h3><span id="TongSL_TaiSan">29</span></h3>
+                                    <p class="text-muted font-15 mb-0">Tổng số lượng tài sản</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="card shadow-none m-0 border-start">
+                                <div class="card-body text-center">
+                                    <i class="mdi mdi-google-classroom" style="font-size: 24px;"></i>
+                                    <h3><span id="TongSL_PhongHoc">29</span></h3>
+                                    <p class="text-muted font-15 mb-0">Tổng số phòng học</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="card shadow-none m-0 border-start">
+                                <div class="card-body text-center">
+                                    <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                    <h3><span id="TongSL_ThanhVien">31</span></h3>
+                                    <p class="text-muted font-15 mb-0">Thành viên</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div> <!-- end row -->
+                </div>
+            </div> <!-- end card-box-->
+        </div> <!-- end col-->
+    </div>
+    <!-- end row-->
+
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dropdown float-end">
+                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">Weekly Report</a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">Monthly Report</a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">Settings</a>
+                        </div>
+                    </div>
+                    <h4 class="header-title mb-3">Các thao tác gần đây</h4>
+
+
+                    <div class="table-responsive">
+                        <table id ="NKHD" class="table table-centered table-nowrap table-hover mb-0">
+                            <tbody>
+                            
+                                
+                               
+                                
+
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive-->
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->
+
+
+
+
+
+
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Select_TongSoLuong_NguoiDung", "NguoiDung")',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                if (data.code == true) {
+                    $("#TongSL_ThanhVien").text(data.SoLuong);
+                } else {
+                    $("#TongSL_ThanhVien").text(0);
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Select_TongSoLuong_Phong", "Phong")',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                if (data.code == true) {
+                    $("#TongSL_PhongHoc").text(data.SoLuong);
+                } else {
+                    $("#TongSL_PhongHoc").text(0);
+                }
+            }
+        });
+
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Select_TongSoLuong_TaiSan", "TaiSan")',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                if (data.code == true) {
+                    $("#TongSL_TaiSan").text(data.SoLuong);
+                } else {
+                    $("#TongSL_TaiSan").text(0);
+                }
+            }
+        });
+        LoadData_NKHD();
+    })
+
+function LoadData_NKHD() {
+    var i = 0;
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_NKHD", "NhatKyHoatDong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+
+                if (i <= 5) {
+                    var rows = "<tr>"
+                        + '<td><span class="text-muted font-13">Hoạt động</span> <br /><span class="badge badge-warning-lighten">' + item.HoatDong + '</span></td>'
+                        + '<td><h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body">Chi tiết hoạt động</a></h5><span class="text-muted font-13">'+item.ChiTietHoatDong+'</span></td>'
+                        + '<td><span class="text-muted font-13">Người thực hiện</span><h5 class="font-14 mt-1 fw-normal">'+item.TenDangNhap+'</h5></td>'
+                        + '<td><span class="text-muted font-13">Thời gian thực hiện</span><h5 class="font-14 mt-1 fw-normal">' + ToJavaScriptDate(item.NgayHoatDong)+'</h5></td>'
+                        + '<td class="table-action" style="width: 90px;"><a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a></td>'
+                        + "</tr>";
+                    $('#NKHD').append(rows);
+                }
+                i++;
+
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+</script>

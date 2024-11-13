@@ -1,0 +1,281 @@
+﻿
+@{
+    ViewBag.Title = "Kiểm kê tài sản";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">
+                        <a href="javascript: void(0);">Kiểm kê</a>
+                    </li>
+                    <li class="breadcrumb-item ">Kiểm kê tài sản</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Kiểm kê tài sản</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#add_new_phieukiemke" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Tạo mới phiếu kiểm kê</a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                            <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                            <button type="button" class="btn btn-light mb-2">Export</button>
+                        </div>
+                    </div><!-- end col-->
+                </div>
+                <table id="table_phieukiemke" class="table table-bordered table-centered mb-0">
+                    <thead>
+                        <tr style="text-align:center">
+                            <th style="width:100px">Mã phiếu</th>
+                            <th>Tên phòng</th>
+                            <th>Trạng thái</th>
+                            <th>Ghi chú</th>
+                            <th style="width:180px">Ngày cập nhất cuối cùng</th>
+                            <th style="width:180px">Ngày tạo</th>
+                            <th style="width:200px" class="text-center">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center">
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- modal add phieu kiem ke -->
+<div id="add_new_phieukiemke" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="standard-modalLabel">Thêm mới phiếu kiểm kê</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <label for="example-select" class="form-label">Chọn phòng cần thêm phiếu kiểm kê: </label>
+                    <select id ="MaPhong_PKK" name ="MaPhong_PKK" class="form-select" id="example-select">
+                      
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu_PKK" name="GhiChu_PKK" rows="5"></textarea>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id ="ThemMoi_PhieuKiemKe" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        var Table_PKK = $('#table_phieukiemke').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+        var Table_CTPKK = $('#table_show_chitiet_phieukiem').DataTable({
+
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+
+        Load_Data_DSPhong();
+        LoadData_PKK(Table_PKK);
+
+
+
+
+        $("#ThemMoi_PhieuKiemKe").click(function () {
+            var MaPhong = $("#MaPhong_PKK").val();
+            var GhiChu = $("#GhiChu_PKK").val();
+            if (MaPhong == "") {
+                ThongBao("Thông báo", "Bạn chưa chọn Phòng cần thêm phiếu kiểm kê");
+            } else {
+                $.confirm({ // xác nhận thêm
+                    title: 'Thông báo',
+                    content: "Bạn có chắc chắn muốn thêm phiếu kiểm kê",
+                    theme: 'dark',
+                    buttons: {
+                        XacNhan: {
+
+                            text: 'Xác nhận', btnClass: 'btn-success', action: function () {
+                                var themmoi = ThemMoi_PhieuKiemKe(MaPhong, GhiChu);
+                                if (themmoi == true) {
+                                    setTimeout(function () {
+                                        LoadData_PKK(Table_PKK);
+                                        ThongBao("Thành công", "Thêm mới phiếu kiểm kê thành công");
+                                    }, 100);
+                                } else {
+                                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                                }
+                            }
+                        },
+                        HuyBo: {
+                            text: 'Hủy bỏ', btnClass: 'btn-warning', action: function () {
+                                ThongBao("Thành công", "Đã hủy bỏ thêm phiếu kiểm kê !!!");
+                            }
+                        }
+                    }
+                });// end xác nhận thêm
+            } // end if
+        });
+
+
+
+});
+
+
+
+
+
+
+function Load_Data_DSPhong() {
+    var Get_DSPhong = Get_Data_DSPhong();
+    if (Get_DSPhong != "Error_Get_Data_DSPhong") {
+        $("#MaPhong_PKK").empty();
+        $('#MaPhong_PKK').append($('<option>', { value: "Chọn phòng....", text: "Chọn phòng...." }));
+        $.each(Get_DSPhong.data, function (i, item) {
+            $('#MaPhong_PKK').append($('<option>', { value: item.MaPhong, text: item.TenPhong }));
+        });
+    }
+}
+
+function LoadData_PKK(Name_DataTable) {
+        var Show_TrangThai = "";
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_PhieuKiemKe", "KiemKe")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function (data) {
+            var items = '';
+            //<i class="mdi mdi-circle text-warning"></i> Shipped
+            $.each(data.data, function (i, item) {
+                if (item.TrangThai == 0) {
+                    Show_TrangThai = '<i class="mdi mdi-circle text-warning"></i> Chưa hoàn thành';
+                    Name_DataTable.row.add([
+                        '<td><a class="text-body fw-bold">#' + item.MaPhieu + '</a></td>',
+                        '<h4><span class="badge bg-primary text-light">' + item.TenPhong + '</span></h4>',
+                        Show_TrangThai,
+                        item.GhiChu,
+                        ToJavaScriptDate(item.NgayCapNhat),
+                        ToJavaScriptDate(item.NgayTao),
+                        '<a href="KiemKe/ChiTietPhieuKiemKe?MaPhieu=' + item.MaPhieu + '" target="_blank" class="btn btn-dark">Chi tiết phiếu kiểm</a>'
+                    ]).draw(false);
+                } else {
+                    Show_TrangThai = '<i class="mdi mdi-circle text-success"></i> Đã hoàn thành';
+                    Name_DataTable.row.add([
+                        '<td><a class="text-body fw-bold">#' + item.MaPhieu + '</a></td>',
+                        '<h4><span class="badge bg-primary text-light">' + item.TenPhong + '</span></h4>',
+                        Show_TrangThai,
+                        item.GhiChu,
+                        ToJavaScriptDate(item.NgayCapNhat),
+                        ToJavaScriptDate(item.NgayTao),
+                        '<a href="KiemKe/Invoice?MaPhieu=' + item.MaPhieu + '" target="_blank" class="btn btn-info"><i class="dripicons-print"></i> </a>'
+                    ]).draw(false);
+                }
+
+                
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+
+
+
+
+function Get_Data_DSPhong() {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_Phong", "Phong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_DSPhong";
+        }
+    });
+    return result;
+}
+
+
+
+function ThemMoi_PhieuKiemKe(MaPhong, GhiChu) {
+        var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_PhieuKiemKe", "KiemKe")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ MaPhong: MaPhong, GhiChu: GhiChu }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == 200) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+    function ThongBao(title, content) {
+        $.alert({
+            title: title,
+            theme: 'dark',
+            content: content,
+        });
+    }
+</script>

@@ -1,0 +1,840 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý phòng";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="javascript: void(0);">Quản lý</a></li>
+                    <li class="breadcrumb-item ">Quản lý phòng</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title">Quản lý phòng</h4>
+                <p class="text-muted font-14">
+                    Quản lý các thông tin cơ bản của phòng, xem được các khu vực cũng như là dãy phòng có trên hệ thống của trường.
+                </p>
+                <ul class="nav nav-tabs nav-bordered mb-3">
+                    <li class="nav-item">
+                        <a href="#phong_view" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            Phòng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#khuvucphong_view" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                            Khu vực phòng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#loaiphong_view" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                            Loại phòng
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="phong_view">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="Them_Phong" href="#" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới Phòng</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_phong" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="table-light">Mã phòng</th>
+                                        <th class="table-light">Tên phòng</th>
+                                        <th class="table-light">Thuộc khu vực </th>
+                                        <th class="table-light">Loại phòng</th>
+                                        <th class="table-light">Ghi chú</th>
+                                        <th class="table-light">Ngày cập nhật cuối cùng</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="khuvucphong_view">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="Them_KVPhong" href="#" class="btn btn-warning mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới khu vực phòng</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_kvphong" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="table-light">Mã khu vực phòng</th>
+                                        <th class="table-light">Tên khu vực phòng</th>
+                                        <th class="table-light">Ghi chú</th>
+                                        <th class="table-light">Ngày cập nhật cuối cùng</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="loaiphong_view">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="Them_LoaiPhong" href="#" class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới loại phòng</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_loaiphong" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="table-light">Mã loại phòng</th>
+                                        <th class="table-light">Tên loại phòng</th>
+                                        <th class="table-light">Ghi chú</th>
+                                        <th class="table-light">Ngày cập nhật cuối cùng</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal add loai phong -->
+<div id="add_new" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal_LoaiPhong">Thêm mới Phòng</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <input type="hidden" id="ID_Hidden" value="" />
+                    <input type="hidden" id="CheDo" value="" />
+                    <label id="Label_Ten" class="form-label">Tên loại phòng: </label>
+                    <input type="text" id="Ten" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu" name="GhiChu" rows="5"></textarea>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="btnSubmit" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="add_new_phong" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal_Phong"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <input type="hidden" id="ID_Hidden" value="" />
+                    <input type="hidden" id="CheDo" value="" />
+                    <label id="Label_Ten" class="form-label">Tên phòng: </label>
+                    <input type="text" id="Ten_Phong" class="form-control">
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Khu vực phòng: </label>
+                    <select id="KhuVucPhong" name="KhuVucPhong" class="form-select">
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Loại phòng: </label>
+                    <select id="LoaiPhong" name="LoaiPhong" class="form-select">
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu_Phong" name="GhiChu_Phong" rows="5"></textarea>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="btnSubmit_Phong" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var Table_P = $('#table_phong').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+
+        var Table_KVPhong = $('#table_kvphong').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+
+        var Table_LoaiPhong = $('#table_loaiphong').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+        LoadData_Phong(Table_P);
+        LoadData_KhuVucPhong(Table_KVPhong);
+        LoadData_LoaiPhong(Table_LoaiPhong);
+        Load_Data_DS_KV_Loai_Phong();
+
+
+        ////////////////////////////////////////////////////////////////////////////////////// Loai Phong
+        $(document).on('click', "a[name='Sua_LoaiPhong']", function () {
+            $("#Ten").val("");
+            $("#GhiChu").val("");
+            var ID_Hidden = $(this).attr('id');
+            $("#Label_Ten").text("Tên loại phòng: ");
+            $("#CheDo").val("Sua");
+            $("#btnSubmit").text("Sửa");
+            $('#TieuDe_Modal_LoaiPhong').text("Cập nhật loại phòng");
+            $.ajax({
+            url: '@Url.Action("Select_LoaiPhong_By_MaLP", "Phong")',
+            type: 'get',
+            data: { MaLP: ID_Hidden},
+            success: function (data) {
+                    if (data.code == true) {
+                        $('#Ten').val(data.data[0].TenLP);
+                        $('#GhiChu').val(data.data[0].GhiChu);
+                        $('#ID_Hidden').val(ID_Hidden);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+
+
+            $("#add_new").modal("show");
+        })
+
+
+        $(document).on('click', "a[id='Them_LoaiPhong']", function () {
+            $("#Ten").val("");
+            $("#GhiChu").val("");
+            $("#Label_Ten").text("Tên loại phòng: ");
+            $("#CheDo").val("Them");
+            $("#btnSubmit").text("Thêm mới");
+            $('#TieuDe_Modal_LoaiPhong').text("Thêm loại phòng");
+            $("#add_new").modal("show");
+        })
+
+
+        $(document).on('click', "a[name='Xoa_LoaiPhong']", function () {
+            var ID_LoaiPhong = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_LoaiPhong", "Phong")',
+                type: 'POST',
+                 data: { MaLP: ID_LoaiPhong},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_LoaiPhong(Table_LoaiPhong);
+                        ThongBao("Thông báo", "Xóa loại phòng thành công");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+        ////////////////////////////////////////////////////////////////////////////////////// KV Phong
+
+
+        $(document).on('click', "a[name='Xoa_KhuVucPhong']", function () {
+            var ID_KhuVucPhong = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_KhuVucPhong", "Phong")',
+                type: 'POST',
+                 data: { MaKV: ID_KhuVucPhong},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_KhuVucPhong(Table_KVPhong);
+                        ThongBao("Thông báo", "Xóa khu vực phòng thành công");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+        $(document).on('click', "a[name='Sua_KhuVucPhong']", function () {
+            var ID_Hidden = $(this).attr('id');
+            $("#Ten").val("");
+            $("#GhiChu").val("");
+            $("#Label_Ten").text("Tên khu vực phòng: ");
+            $("#CheDo").val("Sua_KVPhong");
+            $("#btnSubmit").text("Sửa");
+            $('#TieuDe_Modal_LoaiPhong').text("Cập nhật khu vực phòng");
+            $.ajax({
+            url: '@Url.Action("Select_KhuVucPhong_By_MaKV", "Phong")',
+            type: 'get',
+            data: { MaKV: ID_Hidden},
+            success: function (data) {
+                    if (data.code == true) {
+                        $('#Ten').val(data.data[0].TenKV);
+                        $('#GhiChu').val(data.data[0].GhiChu);
+                        $('#ID_Hidden').val(ID_Hidden);
+                    } else {
+                     alert(data.msg);
+                    }
+                }
+            });
+            $("#add_new").modal("show");
+        })
+
+        $(document).on('click', "a[id='Them_KVPhong']", function () {
+            $("#Ten").val("");
+            $("#GhiChu").val("");
+            $("#Label_Ten").text("Tên khu vực phòng: ");
+            $("#CheDo").val("Them_KVPhong");
+            $("#btnSubmit").text("Thêm mới");
+            $('#TieuDe_Modal_LoaiPhong').text("Thêm khu vực phòng");
+            $("#add_new").modal("show");
+        })
+
+        ////////////////////////////////////////////////////////////////////////////////////// KV Phong - LoaiPhong
+
+        $(document).on('click', "button[id='btnSubmit']", function () {
+            var chedo = $("#CheDo").val();
+            var TenLP = $("#Ten").val();
+            var GhiChu = $("#GhiChu").val();
+            if (chedo == "Them") {
+                var themmoi = Them_LoaiPhong(TenLP, GhiChu);
+                if (themmoi == true) {
+                    setTimeout(function () {
+                        LoadData_LoaiPhong(Table_LoaiPhong);
+                        ThongBao("Thành công", "Thêm mới thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                }
+            } else if (chedo == "Sua") {
+                var ID_LoaiPhong = $("#ID_Hidden").val();
+                // sửa loại phòng
+                var update_lp = Sua_LoaiPhong(ID_LoaiPhong, TenLP, GhiChu);
+                if (update_lp == true) {
+                    setTimeout(function () {
+                        LoadData_LoaiPhong(Table_LoaiPhong);
+                        ThongBao("Thành công", "Cập nhật loại phòng thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Cập nhật không thành công !!");
+                }
+
+            } else if (chedo == "Them_KVPhong") {
+                var themmoi = Them_KVPhong(TenLP, GhiChu);
+                if (themmoi == true) {
+                    setTimeout(function () {
+                        LoadData_KhuVucPhong(Table_KVPhong);
+                        ThongBao("Thành công", "Thêm mới thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                }
+
+            } else if (chedo == "Sua_KVPhong") {
+                var ID_KVPhong = $("#ID_Hidden").val();
+                // sửa KV phòng
+                var update_kvp = Sua_KhuVucPhong(ID_KVPhong, TenLP, GhiChu);
+                if (update_kvp == true) {
+                    setTimeout(function () {
+                        LoadData_KhuVucPhong(Table_KVPhong);
+                        ThongBao("Thành công", "Cập nhật khu vực phòng thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Cập nhật không thành công !!");
+                }
+            }
+        })
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////// Phong
+
+        $(document).on('click', "a[id='Them_Phong']", function () {
+            $("#Ten_Phong").val("");
+            $("#GhiChu_Phong").val("");
+            $("#TieuDe_Modal_Phong").text("Thêm Phòng ");
+            $("#CheDo").val("Them_Phong");
+            $("#btnSubmit_Phong").text("Thêm mới");
+            $("#add_new_phong").modal("show");
+        })
+
+        $(document).on('click', "a[name='Sua_Phong']", function () {
+            var ID_Hidden = $(this).attr('id');
+            $("#Ten_Phong").val("");
+            $("#GhiChu_Phong").val("");
+            $('#TieuDe_Modal_LoaiPhong').text("Cập nhật phòng");
+            $("#CheDo").val("Sua_Phong");
+            $("#btnSubmit_Phong").text("Sửa");
+            $.ajax({
+            url: '@Url.Action("Select_Phong_By_MaPhong", "Phong")',
+            type: 'get',
+             data: { MaPhong: ID_Hidden},
+            success: function (data) {
+                if (data.code == true) {
+                    $('#Ten_Phong').val(data.data[0].TenPhong);
+                        $('#GhiChu_Phong').val(data.data[0].GhiChu);
+                        $('#ID_Hidden').val(ID_Hidden);
+                        $('#KhuVucPhong option[value=' + data.data[0].MaKV + ']').attr('selected', 'selected');
+                        $('#LoaiPhong option[value=' + data.data[0].MaLP + ']').attr('selected', 'selected');
+                    } else {
+                     alert(data.msg);
+                    }
+                }
+            });
+            $("#add_new_phong").modal("show");
+        })
+
+        $(document).on('click', "a[name='Xoa_Phong']", function () {
+            var ID_Phong = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_Phong", "Phong")',
+                type: 'POST',
+                 data: { MaPhong: ID_Phong},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_Phong(Table_P);
+                        ThongBao("Thông báo", "Xóa phòng thành công");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+
+
+
+
+        $(document).on('click', "button[id='btnSubmit_Phong']", function () {
+            var chedo = $("#CheDo").val();
+            var Ten = $("#Ten_Phong").val();
+            var GhiChu = $("#GhiChu_Phong").val();
+            var MaLP = $("#LoaiPhong").val();
+            var MaKV = $("#KhuVucPhong").val();
+
+            if (chedo == "Them_Phong") {
+                var themmoi = Them_Phong(MaLP, MaKV, Ten, GhiChu);
+                if (themmoi == true) {
+                    setTimeout(function () {
+                        LoadData_Phong(Table_P);
+                        ThongBao("Thành công", "Thêm mới thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                }
+            } else if (chedo == "Sua_Phong") {
+                var ID_Phong = $("#ID_Hidden").val();
+                // sửa loại phòng
+                var update_p = Sua_Phong(ID_Phong, MaLP, MaKV, Ten, GhiChu);
+                if (update_p == true) {
+                    setTimeout(function () {
+                        LoadData_Phong(Table_P);
+                        ThongBao("Thành công", "Cập nhật phòng thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Cập nhật không thành công !!");
+                }
+
+            }
+
+
+
+        })
+
+
+
+
+
+});
+
+
+
+function Load_Data_DS_KV_Loai_Phong() {
+        $("#LoaiPhong").empty();
+        $("#KhuVucPhong").empty();
+        $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_LoaiPhong", "Phong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                $('#LoaiPhong').append($('<option>', { value: item.MaLP, text: item.TenLP }));
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+            }
+        });
+
+        $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_KhuVucPhong", "Phong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                $('#KhuVucPhong').append($('<option>', { value: item.MaKV, text: item.TenKV }));
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+});
+
+
+
+
+
+}
+
+
+function LoadData_LoaiPhong(Name_DataTable) {
+    $("#table_loaiphong tbody tr").remove();
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_LoaiPhong", "Phong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+
+
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaLP + '</span></h4>',
+                    '<h4><span class="badge bg-secondary text-light">' + item.TenLP +'</span></h4>',
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat),
+                    '<a name = "Sua_LoaiPhong" id = "' + item.MaLP + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-pencil"></i></a><a name = "Xoa_LoaiPhong" id = "' + item.MaLP + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+                ]).draw(false);
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+function LoadData_KhuVucPhong(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_KhuVucPhong", "Phong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaKV + '</span></h4>',
+                    '<h4><span class="badge bg-info text-light">' + item.TenKV + '</span></h4>',
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat),
+                    '<a name = "Sua_KhuVucPhong" id = "' + item.MaKV + '"  href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-pencil"></i></a><a name = "Xoa_KhuVucPhong" id = "' + item.MaKV + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+                ]).draw(false);
+
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+function LoadData_Phong(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_Phong", "Phong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+
+
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaPhong + '</span></h4>',
+                    '<h4><span class="badge bg-primary text-light">' + item.TenPhong + '</span></h4>',
+                    '<h4><span class="badge bg-info text-light">' + item.TenKV + '</span></h4>',
+                    '<h4><span class="badge bg-secondary text-light">' + item.TenLP + '</span></h4>',
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat),
+                    '<a name = "Sua_Phong" id = "' + item.MaPhong + '" href = "javascript:void(0)" class="action-icon" > <i class="mdi mdi-pencil"></i></a><a name = "Xoa_Phong" id = "' + item.MaPhong + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+                ]).draw(false);
+
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+function Them_LoaiPhong(TenLP, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_LoaiPhong", "Phong")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            TenLP: TenLP,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+function Them_KVPhong(TenKV, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_KhuVucPhong", "Phong")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            TenKV: TenKV,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+
+function Them_Phong(MaLP, MaKV, TenPhong, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_Phong", "Phong")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaLP: MaLP,
+            MaKV: MaKV,
+            TenPhong: TenPhong,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+    }
+
+function Sua_Phong(MaPhong, MaLP, MaKV, TenPhong, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_Phong", "Phong")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaPhong: MaPhong,
+            MaLP: MaLP,
+            MaKV: MaKV,
+            TenPhong: TenPhong,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+function Sua_KhuVucPhong(MaKV, TenKV, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_KhuVucPhong", "Phong")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaKV: MaKV,
+            TenKV: TenKV,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+function Sua_LoaiPhong(MaLP, TenLP, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_LoaiPhong", "Phong")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaLP: MaLP,
+            TenLP: TenLP,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+function ThongBao(title, content) {
+    $.alert({
+        title: title,
+        theme: 'dark',
+        content: content,
+    });
+}
+</script>
+

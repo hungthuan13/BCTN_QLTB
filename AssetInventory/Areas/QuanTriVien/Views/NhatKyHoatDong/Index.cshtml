@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Nhật ký hoạt động";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="javascript: void(0);">Nhật ký hoạt động</a></li>
+                    <li class="breadcrumb-item ">Nhật ký hoạt động</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title">Nhật ký hoạt động</h4>
+                <p class="text-muted font-14">
+                    Quản lý hoạt động, có thể xem toàn bộ hoạt động của hệ thống
+                </p>
+                <ul class="nav nav-tabs nav-bordered mb-3">
+                    <li class="nav-item">
+                        <a href="#nkhd_view" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            Nhật ký
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="nkhd_view">
+                        
+                        <div class="table-responsive-sm">
+                            <table id="table_nkhd" class="table dt-responsive nowrap w-100">
+                                <thead style="text-align:center">
+                                    <tr>
+                                        <th class="table-light">Mã NKHD</th>
+                                        <th class="table-light">Tên đăng nhập thực hiện</th>
+                                        <th class="table-light">Hoạt động</th>
+                                        <th class="table-light">Chi tiết hoạt động</th>
+                                        <th class="table-light">Ngày thực hiện</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody style="text-align:center">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var Table_NKDH = $('#table_nkhd').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+        LoadData_NKHD(Table_NKDH);
+    })
+   
+
+
+function LoadData_NKHD(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_NKHD", "NhatKyHoatDong")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaNKHD + '</span></h4>',
+                    '<h4><span class="badge bg-secondary text-light">' + item.TenDangNhap + '</span></h4>',
+                    '<h4><span class="badge bg-danger text-light">' + item.HoatDong + '</span></h4>',
+                    '<h4><span class="badge bg-success text-light">' + item.ChiTietHoatDong + '</span></h4>',
+                    ToJavaScriptDate(item.NgayHoatDong),
+                    '<a name = "Sua_KhuVucPhong" id = "' + item.MaKV + '"  href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-pencil"></i></a><a name = "Xoa_KhuVucPhong" id = "' + item.MaKV + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+
+                ]).draw(false);
+
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+</script>

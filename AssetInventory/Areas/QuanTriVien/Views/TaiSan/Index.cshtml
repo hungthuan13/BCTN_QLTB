@@ -1,0 +1,1086 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý tài sản";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="javascript: void(0);">Quản lý</a></li>
+                    <li class="breadcrumb-item ">Quản lý tài sản</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title">Quản lý tài sản</h4>
+                <p class="text-muted font-14">
+                    Quản lý các tài sản hiện có ở trường.
+                </p>
+                <ul class="nav nav-tabs nav-bordered mb-3">
+                    <li class="nav-item">
+                        <a href="#taisan_view" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            Tài sản
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nhomtaisan_view" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                            Nhóm tài sản
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#loaitaisan_view" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                            Loại tài sản
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+
+                    <div class="tab-pane show active" id="taisan_view">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="ThemMoi_TaiSan" href="#" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới tài sản</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_taisan" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="table-light">Mã tài sản</th>
+                                        <th class="table-light">Thuộc nhóm tài sản</th>
+                                        <th class="table-light">Thuộc loại tài sản</th>
+                                        <th class="table-light">Tên tài sản</th>
+                                        <th class="table-light">Số lượng</th>
+                                        <th class="table-light">Ghi chú</th>
+                                        <th class="table-light">Ngày cập nhật cuối cùng</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="nhomtaisan_view">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="ThemMoi_NhomTaiSan" href="#" class="btn btn-success mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới nhóm tài sản</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_nhomtaisan" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="table-light">Mã nhóm tài sản</th>
+                                        <th class="table-light">Thuộc loại tài sản</th>
+                                        <th class="table-light">Tên nhóm tài sản</th>
+                                        <th class="table-light">Ghi chú</th>
+                                        <th class="table-light">Ngày cập nhật cuối cùng</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="loaitaisan_view">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <a id="ThemMoi_LoaiTS" href="#" class="btn btn-secondary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Thêm mới loại tài sản</a>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-sm-end">
+                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                    <button type="button" class="btn btn-light mb-2">Export</button>
+                                </div>
+                            </div><!-- end col-->
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="table_loaitaisan" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="table-light">Mã loại tài sản</th>
+                                        <th class="table-light">Tên loại tài sản</th>
+                                        <th class="table-light">Ghi chú</th>
+                                        <th class="table-light">Ngày cập nhật cuối cùng</th>
+                                        <th class="table-light">Hành động</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- modal add loai tai san -->
+<div id="add_new_loaitaisan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal_LoaiTS"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <input type="hidden" id="ID_Hidden" value="" />
+                    <input type="hidden" id="CheDo" value="" />
+                    <label id="Label_Ten" class="form-label">Tên loại tài sản: </label>
+                    <input type="text" id="TenLoaiTS" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu" name="GhiChu" rows="5"></textarea>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="btnSubmit_LoaiTS" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="add_new_nhom_ts" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal_NhomTaiSan"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <input type="hidden" id="ID_Hidden" value="" />
+                    <input type="hidden" id="CheDo" value="" />
+                    <label id="Label_Ten" class="form-label">Tên nhóm tài sản: </label>
+                    <input type="text" id="TenNTS" class="form-control">
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Loại tài sản: </label>
+                    <select id="LoaiTaiSan" name="LoaiTaiSan" class="form-select">
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu_NTS" name="GhiChu_NTS" rows="5"></textarea>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="btnSubmit_NhomTS" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal add tài sản -->
+<div id="add_new_ts" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal_TaiSan">Thêm mới tài sản</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="tdn" class="form-label">Tên tài sản: </label>
+                            <input type="text" id="TenTS" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">Nhóm tài sản: </label>
+                            <select id="NhomTaiSan" name="NhomTaiSan" class="form-select">
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="hvt" class="form-label">Giá trị: </label>
+                            <input type="number" id="GiaTri" min="0" value="0" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="cd" class="form-label">Số lượng: </label>
+                            <input type="number" id="SoLuong" min="1" value="1" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="form-label">Hãng sản xuất: </label>
+                            <input type="text" id="HangSanXuat" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label">Năm sản xuất: </label>
+                            <input type="number" id="NamSanXuat" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label">Nước sản xuất: </label>
+                            <input type="text" id="NuocSanXuat" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu_TS" name="GhiChu_TS" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnThemMoi_TaiSan">Thêm mới</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- modal xem tai san -->
+<div id="xem_taisan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal">Sửa người dùng</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="form-label">Tên tài sản: </label>
+                            <input type="text" id="TenTS_Xem" class="form-control" readonly="">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="form-label">Thuộc nhóm tài sản: </label>
+                            <input type="text" id="NhomTS_Xem" class="form-control" readonly="">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="form-label">Thuộc loại tài sản: </label>
+                            <input type="text" id="LoaiTS_Xem" class="form-control" readonly="">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="form-label">Số lượng: </label>
+                            <input type="number" id="SoLuongChinh_Xem" class="form-control" readonly="">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="form-label">Số lượng thực tế: </label>
+                            <input type="number" id="SoLuong_Xem" class="form-control" readonly="">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="form-label">Giá trị: </label>
+                            <input type="number" id="GiaTri_Xem" class="form-control" readonly="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="form-label">Hãng sản xuất: </label>
+                            <input type="text" id="HangSanXuat_Xem" class="form-control" readonly="">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label">Năm sản xuất: </label>
+                            <input type="text" id="NamSanXuat_Xem" class="form-control" readonly="">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label">Nước sản xuất: </label>
+                            <input type="text" id="NuocSanXuat_Xem" class="form-control" readonly="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu_Xem_TS" name="GhiChu_Xem_TS" rows="5" readonly=""></textarea>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal sua tai san -->
+<div id="sua_taisan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TieuDe_Modal">Sửa người dùng</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <input type="hidden" id="MaTS_Sua" class="form-control">
+
+                    <label class="form-label">Tên tài sản: </label>
+                    <input type="text" id="TenTS_Sua" class="form-control">
+                </div>
+               
+
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Hãng sản xuất: </label>
+                            <input type="text" id="HangSanXuat_Sua" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Nước sản xuất: </label>
+                            <input type="text" id="NuocSanXuat_Sua" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="example-textarea" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="GhiChu_TS_Sua" name="GhiChu_Xem_TS" rows="5"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSua_TaiSan">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+$(document).ready(function () {
+
+        var Table_TS = $('#table_taisan').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+
+        var Table_NTS = $('#table_nhomtaisan').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+
+        var Table_LTS = $('#table_loaitaisan').DataTable({
+            "ordering": false,
+            responsive: true,
+            paging: true,
+        });
+
+        
+        LoadData_TaiSan(Table_TS);
+        LoadData_NhomTaiSan(Table_NTS);
+        LoadData_LoaiTaiSan(Table_LTS);
+        Load_Data_DS_LTS_NTS();
+
+        $(document).on('click', "a[id='ThemMoi_LoaiTS']", function () {
+            $("#TenLoaiTS").val("");
+            $("#GhiChu").val("");
+            $("#CheDo").val("ThemMoi");
+            $('#TieuDe_Modal_LoaiTS').text("Thêm mới loại tài sản");
+            $("#btnSubmit_LoaiTS").text("Thêm mới");
+            $("#add_new_loaitaisan").modal("show");
+        })
+
+        $(document).on('click', "a[name='Sua_LoaiTS']", function () {
+            var MaLoaiTS = $(this).attr('id');
+            $("#TenLoaiTS").val("");
+            $("#GhiChu").val("");
+            $("#CheDo").val("ChinhSua");
+            $('#TieuDe_Modal_LoaiTS').text("Chỉnh sửa loại tài sản");
+            $("#btnSubmit_LoaiTS").text("Lưu");
+            $.ajax({
+            url: '@Url.Action("Select_LoaiTaiSan_By_MaLoaiTS", "TaiSan")',
+            type: 'get',
+                data: {
+                    MaLoaiTS: MaLoaiTS
+                },
+            success: function (data) {
+                    if (data.code == true) {
+                        $('#TenLoaiTS').val(data.data[0].TenLoaiTS);
+                        $('#GhiChu').val(data.data[0].GhiChu);
+                        $('#ID_Hidden').val(MaLoaiTS);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+            $("#add_new_loaitaisan").modal("show");
+        })
+
+        $(document).on('click', "a[name='Xoa_LoaiTS']", function () {
+            var ID = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_LoaiTaiSan", "TaiSan")',
+                type: 'POST',
+                 data: { MaLoaiTS: ID},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_LoaiTaiSan(Table_LTS);
+                        ThongBao("Thông báo", "Xóa thành công");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+        $(document).on('click', "button[id='btnSubmit_LoaiTS']", function () {
+            var TenLTS = $("#TenLoaiTS").val();
+            var GhiChu = $("#GhiChu").val();
+            var CheDo = $("#CheDo").val();
+            if (CheDo == "ThemMoi") {
+                var themmoi = Them_LoaiTaiSan(TenLTS, GhiChu);
+                if (themmoi == true) {
+                    setTimeout(function () {
+                        LoadData_LoaiTaiSan(Table_LTS);
+                        ThongBao("Thành công", "Thêm mới thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                }
+            } else if (CheDo == "ChinhSua") {
+                var ID_Phong = $("#ID_Hidden").val();
+                var update = Sua_LoaiTaiSan(ID_Phong, TenLTS, GhiChu);
+                if (update == true) {
+                    setTimeout(function () {
+                        LoadData_LoaiTaiSan(Table_LTS);
+                        ThongBao("Thành công", "Cập nhật thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Cập nhật không thành công !!");
+                }
+            }
+
+        })
+
+
+
+
+         $(document).on('click', "a[id='ThemMoi_NhomTaiSan']", function () {
+                $("#TenNTS").val("");
+                $("#GhiChu").val("");
+                $("#CheDo").val("ThemMoi");
+                $('#TieuDe_Modal_NhomTaiSan').text("Thêm mới nhóm tài sản");
+                $("#btnSubmit_LoaiTS").text("Thêm mới");
+                $("#add_new_nhom_ts").modal("show");
+        })
+
+         $(document).on('click', "a[name='Sua_NhomTS']", function () {
+            var MaNhomTS = $(this).attr('id');
+            $("#TenNTS").val("");
+             $("#GhiChu_NTS").val("");
+            $("#CheDo").val("ChinhSua");
+            $('#TieuDe_Modal_NhomTaiSan').text("Chỉnh sửa nhóm tài sản");
+            $("#btnSubmit_NhomTS").text("Lưu");
+            $.ajax({
+            url: '@Url.Action("Select_NhomTaiSan_By_MaNhomTS", "TaiSan")',
+            type: 'get',
+                data: {
+                    MaNhomTS: MaNhomTS
+                },
+                success: function (data) {
+                    if (data.code == true) {
+                        $('#TenNTS').val(data.data[0].TenNhomTS);
+                        $('#GhiChu_NTS').val(data.data[0].GhiChu);
+                        $('#LoaiTaiSan option[value=' + data.data[0].MaLoaiTS + ']').attr('selected', 'selected');
+                        $('#ID_Hidden').val(MaNhomTS);
+
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+             $("#add_new_nhom_ts").modal("show");
+        })
+
+         $(document).on('click', "a[name='Xoa_NhomTS']", function () {
+            var ID = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_NhomTaiSan", "TaiSan")',
+                type: 'POST',
+                 data: { MaNhomTS: ID},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_NhomTaiSan(Table_NTS);
+                        ThongBao("Thông báo", "Xóa thành công");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+         $(document).on('click', "button[id='btnSubmit_NhomTS']", function () {
+            var TenLTS = $("#TenNTS").val();
+            var MaLoaiTS = $("#LoaiTaiSan").val();
+            var GhiChu = $("#GhiChu_NTS").val();
+            var CheDo = $("#CheDo").val();
+            if (CheDo == "ThemMoi") {
+                var themmoi = Them_NhomTaiSan(MaLoaiTS, TenLTS, GhiChu);
+                if (themmoi == true) {
+                    setTimeout(function () {
+                        LoadData_NhomTaiSan(Table_NTS);
+                        ThongBao("Thành công", "Thêm mới thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Thêm mới không thành công !!");
+                }
+            } else if (CheDo == "ChinhSua") {
+                var ID = $("#ID_Hidden").val();
+                var update = Sua_NhomTS(ID, MaLoaiTS, TenLTS, GhiChu);
+                if (update == true) {
+                    setTimeout(function () {
+                        LoadData_NhomTaiSan(Table_NTS);
+                        ThongBao("Thành công", "Cập nhật thành công");
+                    }, 100);
+                } else {
+                    ThongBao("Thất bại", "Cập nhật không thành công !!");
+                }
+            }
+
+        })
+
+
+
+
+        $(document).on('click', "a[id='ThemMoi_TaiSan']", function () {
+            $("#TenTS").val("");
+            $("#GiaTri").val("");
+            $("#SoLuong").val("");
+            $("#HangSanXuat").val("");
+            $("#NamSanXuat").val("");
+            $("#NuocSanXuat").val("");
+            $("#GhiChu").val("");
+            $("#CheDo").val("ThemMoi");
+            $("#TieuDe_Modal_TaiSan").text("Thêm mới tài sản");
+            $("#add_new_ts").modal("show");
+        })
+
+
+        $(document).on('click', "button[id='btnThemMoi_TaiSan']", function () {
+            var TenTS = $("#TenTS").val();
+            var GiaTri = $("#GiaTri").val();
+            var SoLuong = $("#SoLuong").val();
+            var HangSanXuat = $("#HangSanXuat").val();
+            var NamSanXuat = $("#NamSanXuat").val();
+            var NuocSanXuat = $("#NuocSanXuat").val();
+            var GhiChu = $("#GhiChu").val();
+            var MaNhomTS = $("#NhomTaiSan").val();
+            var themmoi = Them_TS(MaNhomTS, TenTS, GiaTri, SoLuong, HangSanXuat, NamSanXuat, NuocSanXuat, GhiChu);
+            if (themmoi == true) {
+                setTimeout(function () {
+                    LoadData_TaiSan(Table_TS);
+                    ThongBao("Thành công", "Thêm mới thành công");
+                }, 100);
+            } else {
+                ThongBao("Thất bại", "Thêm mới không thành công !!");
+            }
+
+
+        })
+
+
+        $(document).on('click', "a[name='Xoa_TS']", function () {
+            var ID = $(this).attr('id');
+             $.ajax({
+                url: '@Url.Action("Delete_TaiSan", "TaiSan")',
+                type: 'POST',
+                 data: { MaTS: ID},
+                success: function (data) {
+                    if (data.code == true) {
+                        LoadData_TaiSan(Table_TS);
+                        ThongBao("Thông báo", "Xóa thành công");
+                    } else {
+                        ThongBao("Thông báo", data.msg);
+                    }
+                }
+            });
+        })
+
+
+
+        $(document).on('click', "a[name='Xem_TS']", function () {
+            var ID_TS = $(this).attr('id');
+            $.ajax({
+            url: '@Url.Action("Select_TaiSan_By_MaTS", "TaiSan")',
+            type: 'get',
+            data: { MaTS: ID_TS},
+            success: function (data) {
+                    if (data.code == true) {
+                        $('#TenTS_Xem').val(data.data[0].TenTS);
+                        $('#NhomTS_Xem').val(data.data[0].TenNhomTS);
+                        $('#LoaiTS_Xem').val(data.data[0].TenLoaiTS);
+                        $('#SoLuongChinh_Xem').val(data.data[0].SoLuongChinh);
+                        $('#SoLuong_Xem').val(data.data[0].SoLuong);
+                        $('#GiaTri_Xem').val(data.data[0].GiaTri);
+                        $('#HangSanXuat_Xem').val(data.data[0].HangSanXuat);
+                        $('#NamSanXuat_Xem').val(data.data[0].NamSanXuat);
+                        $('#NuocSanXuat_Xem').val(data.data[0].NuocSanXuat);
+                        $('#GhiChu_Xem_TS').val(data.data[0].GhiChu);
+
+
+
+                        $("#xem_taisan").modal("show");
+
+                    } else {
+                     alert(data.msg);
+                    }
+                }
+            });
+        })
+
+        $(document).on('click', "a[name='Sua_TS']", function () {
+            var ID_TS = $(this).attr('id');
+            $.ajax({
+            url: '@Url.Action("Select_TaiSan_By_MaTS", "TaiSan")',
+            type: 'get',
+            data: { MaTS: ID_TS},
+            success: function (data) {
+                if (data.code == true) {
+                        $("#MaTS_Sua").val(ID_TS);
+                        $('#TenTS_Sua').val(data.data[0].TenTS);
+                        $('#HangSanXuat_Sua').val(data.data[0].HangSanXuat);
+                        $('#NamSanXuat_Sua').val(data.data[0].NamSanXuat);
+                        $('#NuocSanXuat_Sua').val(data.data[0].NuocSanXuat);
+                        $('#GhiChu_TS_Sua').val(data.data[0].GhiChu);
+                        $("#sua_taisan").modal("show");
+
+                    } else {
+                     alert(data.msg);
+                    }
+                }
+            });
+        })
+
+
+        $(document).on('click', "button[id='btnSua_TaiSan']", function () {
+            var TenTS = $("#TenTS_Sua").val();
+            var HangSanXuat = $("#HangSanXuat_Sua").val();
+            var NuocSanXuat = $("#NuocSanXuat_Sua").val();
+            var GhiChu = $("#GhiChu_TS_Sua").val();
+            var MaTS = $("#MaTS_Sua").val();
+            var sua = Sua_TS(MaTS, TenTS, HangSanXuat, NuocSanXuat, GhiChu);
+            if (sua == true) {
+                setTimeout(function () {
+                    LoadData_TaiSan(Table_TS);
+                    ThongBao("Thành công", "Sửa thành công");
+                }, 100);
+            } else {
+                ThongBao("Thất bại", "Sửa không thành công !!");
+            }
+
+
+        })
+
+
+});
+
+
+
+
+
+
+
+
+function Load_Data_DS_LTS_NTS() {
+    $("#LoaiTaiSan").empty();
+    $("#NhomTaiSan").empty();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_LoaiTaiSan", "TaiSan")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                $('#LoaiTaiSan').append($('<option>', { value: item.MaLoaiTS, text: item.TenLoaiTS }));
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_NhomTaiSan", "TaiSan")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                $('#NhomTaiSan').append($('<option>', { value: item.MaNhomTS, text: item.TenNhomTS }));
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+
+}
+
+
+function LoadData_LoaiTaiSan(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_LoaiTaiSan", "TaiSan")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaLoaiTS +'</span></h4>' ,
+                    '<h4><span class="badge bg-dark  text-light">' + item.TenLoaiTS +'</span></h4>',
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat),
+                    '<a name = "Sua_LoaiTS" id = "' + item.MaLoaiTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-pencil"></i></a><a name = "Xoa_LoaiTS" id = "' + item.MaLoaiTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+
+                ]).draw(false);
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+    }
+
+function LoadData_NhomTaiSan(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_NhomTaiSan", "TaiSan")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaNhomTS + '</span></h4>',
+                    '<h4><span class="badge bg-dark text-light">' + item.TenLoaiTS + '</span></h4>',
+                    '<h4><span class="badge bg-danger text-light">' + item.TenNhomTS + '</span></h4>',
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat),
+                    '<a name = "Sua_NhomTS" id = "' + item.MaNhomTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-pencil"></i></a><a name = "Xoa_NhomTS" id = "' + item.MaNhomTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+
+                ]).draw(false);
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+
+
+function LoadData_TaiSan(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_TaiSan", "TaiSan")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+
+                Name_DataTable.row.add([
+                    '<h4><span class="badge badge-primary-lighten rounded-pill">' + item.MaTS + '</span></h4>',
+                    '<h4><span class="badge bg-success text-light">' + item.TenTS + '</span></h4>',
+                    '<h4><span class="badge bg-danger text-light">' + item.TenNhomTS + '</span></h4>',
+                    '<h4><span class="badge bg-dark text-light">' + item.TenLoaiTS + '</span></h4>',
+                    '<h4><span class="badge bg-light text-dark">' + item.SoLuong + '</span></h4>',
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat),
+                    '<a name = "Xem_TS" id = "' + item.MaTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-eye"></i></a><a name = "Sua_TS" id = "' + item.MaTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-pencil"></i></a><a name = "Xoa_TS" id = "' + item.MaTS + '" href="javascript:void(0)" class="action-icon"> <i class="mdi mdi-delete"></i></a>'
+
+                ]).draw(false);
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+    }
+
+
+function Them_NhomTaiSan(MaLoaiTS, TenNhomTS, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_NhomTaiSan", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaLoaiTS: MaLoaiTS,
+            TenNhomTS: TenNhomTS,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+    }
+
+
+function Them_LoaiTaiSan(TenLoaiTS, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_LoaiTaiSan", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            TenLoaiTS: TenLoaiTS,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+    }
+
+
+function Them_TS(MaNhomTS, TenTS, GiaTri, SoLuongChinh, HangSanXuat, NamSanXuat, NuocSanXuat, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_TaiSan", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaNhomTS: MaNhomTS,
+            TenTS: TenTS,
+            GiaTri: GiaTri,
+            SoLuongChinh: SoLuongChinh,
+            HangSanXuat: HangSanXuat,
+            NamSanXuat: NamSanXuat,
+            NuocSanXuat: NuocSanXuat,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+
+function Sua_LoaiTaiSan(MaLoaiTS, TenLoaiTS, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_LoaiTaiSan", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaLoaiTS: MaLoaiTS,
+            TenLoaiTS: TenLoaiTS,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+    }
+
+
+function Sua_NhomTS(MaNhomTS, MaLoaiTS, TenNhomTS, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_NhomTaiSan", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaNhomTS: MaNhomTS,
+            MaLoaiTS: MaLoaiTS,
+            TenNhomTS: TenNhomTS,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+
+function Sua_TS(MaTS, TenTS, HangSanXuat, NuocSanXuat, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_TaiSan", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            MaTS: MaTS,
+            TenTS: TenTS,
+            HangSanXuat: HangSanXuat,
+            NuocSanXuat: NuocSanXuat,
+            GhiChu: GhiChu
+        }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+}
+
+
+
+function ThongBao(title, content) {
+    $.alert({
+        title: title,
+        theme: 'dark',
+        content: content,
+    });
+}
+
+
+</script>
+

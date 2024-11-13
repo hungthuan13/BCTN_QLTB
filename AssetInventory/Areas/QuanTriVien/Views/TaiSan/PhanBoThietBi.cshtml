@@ -1,0 +1,625 @@
+﻿@using AssetInventory.Models;
+@{
+    ViewBag.Title = "Phân bố thiết bị";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+
+    if (Session["Admin"] == null) //Giao diện Login
+    {
+        Response.Redirect("~/QuanTriVien/TrangChu/DangNhap");
+    }
+    NguoiDung kh = (NguoiDung)Session["Admin"];
+
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">
+                        <a href="javascript: void(0);">Phân bố</a>
+                    </li>
+                    <li class="breadcrumb-item ">Phân bố tài sản</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="@kh.MaND" id="MaND_Them_PB"/>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title">Quản lý phân bố</h4>
+                <p class="text-muted font-14"> Phân bố các tài sản, công cụ dụng cụ cho các phòng học, ngoài ra có thể chỉnh sửa một cách dễ dàng với những người dùng có phân quyền tương ứng... </p>
+                <ul class="nav nav-tabs nav-bordered mb-3">
+                    <li class="nav-item">
+                        <a href="#pb_view" data-bs-toggle="tab" aria-expanded="false" class="nav-link active"> Phân bố </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#dspb_view" data-bs-toggle="tab" aria-expanded="true" class="nav-link"> Xem danh sách phân bố </a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="pb_view">
+
+                        <div class="row">
+
+                            <div class="col-lg-6 border">
+                                <br />
+
+                                <div class="mb-3">
+                                    <label for="TaiKhoan" class="form-label">Người dùng đang thêm: </label>
+                                    <input type="text" id="TaiKhoan" class="form-control" readonly="" value="@kh.HoVaTen">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="TenPhong" class="form-label">Chọn phòng cần phân bố: </label>
+                                    <!-- Chọn phòng -->
+                                    <select onchange="" id="MaPhong" name="MaPhong" class="form-control select2" data-toggle="select2"></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="TS-CDCC" class="form-label">Chọn TS-CDCC cần thêm vào phòng: </label>
+                                    <!-- Chọn TS-CDCC -->
+                                    <select id="TaiSan" class="select2 form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Chọn TS-CDCC...">
+                                    </select>
+                                </div>
+                                <div style="text-align:center" class="mb-3">
+                                    <button type="button" id="XacNhan_Them_PhanBo" class="btn btn-success">Xác nhận thêm</button>
+                                    <button type="button" id="Huy_Them_PhanBo" class="btn btn-danger">Hủy thêm</button>
+                                </div>
+
+
+                                <br />
+                            </div>
+
+
+                            <div class="col-lg-6 border">
+                                <div class="table-responsive">
+                                    <table id="table_list_taisan_add" class="table table-bordered dt-responsive nowrap w-100">
+                                        <thead>
+                                            <tr style="text-align: center; font-size: 13px;">
+                                                <th>Mã tài sản</th>
+                                                <th>Tên tài sản</th>
+                                                <th>Số lượng cần thêm</th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align: center;">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <hr /><br />
+
+
+                        <div class="row">
+
+                            <h3><center>Thông sản tài sản có trong phòng</center></h3>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table id="table_info_taisan_phong" class="table table-bordered table-centered">
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th>Mã tài sản</th>
+                                                <th>Thuộc nhóm tài sản</th>
+                                                <th>Tên tài sản</th>
+                                                <th>Số lượng hiện đang có</th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align: center;">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <!-- end col -->
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="tab-pane show" id="dspb_view">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="table-responsive">
+                                    <table id="table_chitiet_phanbo" class="table dt-responsive nowrap w-100">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th style="text-align:center;">STT</th>
+                                                <th style="text-align:center;">Tên phòng</th>
+                                                <th style="width: 400px; text-align: center;">Tổng số lượng TS-CCDC hiện có</th>
+                                                <th style="text-align:center;">Ngày tạo</th>
+                                                <th style="width: 400px;text-align: center;">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal_chitiet_phanbo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-full-width modal-dialog-top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p style="text-align:center;font-weight: bold; font-size: 22px;" class="modal-title" id="modal_tieude">Chi tiết phân bố</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <center>
+                                    <p style="color: yellow; font-weight: bold; font-size: 20px;" class="header-title">Chi tiết các tài sản có trong phòng học</p>
+                                </center>
+                                <hr>
+                                <table id="table_show_chitiet_phanbo" class="table table-bordered dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr style="text-align:center">
+                                            <th>Mã tài sản</th>
+                                            <th>Thuộc nhóm tài sản</th>
+                                            <th>Tên tài sản</th>
+                                            <th>Số lượng</th>
+                                            <th>Hãng sản xuất</th>
+                                            <th>Năm sản xuất</th>
+                                            <th>Nước sản xuất</th>
+                                            <th>Ghi chú</th>
+                                            <th>Ngày thêm</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="text-align:center"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Chỉnh sửa tài sản phòng này</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Tắt</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+// chỗ này để click vào phòng nào thì sẽ hiển thị thông tin theo Phòng đó
+$(document).ready(function () {
+    var MaPhong = "";
+    var MaND_Them_PB = $("#MaND_Them_PB").val();
+
+    var Table_Info_TaiSan_Theo_Phong = $('#table_info_taisan_phong').DataTable({
+        bFilter: true,
+        responsive: true,
+        bInfo: false,
+        scrollY: "300px",
+        scrollCollapse: true,
+        paging: false,
+    });
+
+
+
+    var Table_List_TaiSan_Add = $('#table_list_taisan_add').DataTable({
+        "ordering": false,
+        bFilter: false,
+        responsive: true,
+        bInfo: false,
+        scrollY: "320px",
+        scrollCollapse: true,
+        paging: false,
+    });
+
+    var Table_ChiTiet_PhanBo = $('#table_chitiet_phanbo').DataTable({
+        "ordering": false,
+        responsive: true,
+        paging: true,
+    });
+
+    var Table_Show_ChiTiet_PhanBo = $('#table_show_chitiet_phanbo').DataTable({
+        "ordering": false,
+        responsive: true,
+        pageLength: 6,
+        paging: true,
+    });
+
+    Load_Data_DSPhong();
+    Load_Table_ChiTiet_PhanBo(Table_ChiTiet_PhanBo);
+
+
+
+    $('button[name="Xem_ChiTiet"]').click(function (e) {
+        var id_Phong = $(this).attr('id');
+        Load_ChiTiet_PhanBo(Table_Show_ChiTiet_PhanBo, id_Phong);
+    });
+    $('#MaPhong').on('select2:select', function (e) {
+        var data = e.params.data;
+        if (data.id != "Chọn phòng....") { // nếu click khác "chọn phòng...." thì mới hiển thị ds tài sản
+            MaPhong = data.id;
+            $("#TaiSan").empty();
+            Load_Data_DSTaiSan();
+            Load_Data_PhanBo_Theo_MaPhong(Table_Info_TaiSan_Theo_Phong, data.id);
+
+        } else { // còn ngược lại
+            $("#TaiSan").empty();
+            Load_Data_DSTaiSan();
+            Table_List_TaiSan_Add.clear().draw();
+            Table_Info_TaiSan_Theo_Phong.clear().draw(); // xóa table hiển thị ds tài sản theo phòng
+
+        }
+    });
+
+
+$('#TaiSan').on('select2:select', function (e) { // nếu click vào chọn thiết bị
+    var data = e.params.data;
+    var Get_TaiSan_Theo_MaTS = Get_Data_TaiSan_By_MaPhong(data.id);
+    if (Get_TaiSan_Theo_MaTS != "Error_Get_Data_TaiSan_By_MaPhong") {
+        Table_List_TaiSan_Add.row.add([Get_TaiSan_Theo_MaTS.data[0].MaTS, '<h4><span class="badge bg-dark text-light">' + Get_TaiSan_Theo_MaTS.data[0].TenTS + '</span></h4>', '<input type="number" class="form-control" name="SL_' + Get_TaiSan_Theo_MaTS.data[0].MaTS + '" value="1" min="1" max="' + Get_TaiSan_Theo_MaTS.data[0].SoLuong + '" step="1" />', '<textarea class="form-control" id="GhiChu_' + Get_TaiSan_Theo_MaTS.data[0].MaTS +'" rows="4"></textarea>']).draw(false);
+    }
+});
+
+
+    $('#TaiSan').on('select2:unselect', function (e) { // nếu bỏ chọn thiết bị
+        var data = e.params.data;
+        Table_List_TaiSan_Add
+            .column(0)
+            .data()
+            .each(function (value, index) {
+                if (value == data.id) {
+                    Table_List_TaiSan_Add.row(index).remove().draw(false);
+                    Table_List_TaiSan_Add.row(index).invalidate().draw(false);
+                }
+
+            });
+    });
+
+    $("#XacNhan_Them_PhanBo").click(function () {
+
+        if (MaPhong == "") {
+            ThongBao("Thông báo", "Bạn chưa chọn Phòng cần phân bổ");
+        } else {
+
+
+            $.confirm({ // xác nhận thêm
+                title: 'Thông báo',
+                content: "Bạn có chắc chắn muốn thêm TS-CDCC",
+                theme: 'dark',
+                buttons: {
+                    XacNhan: {
+                        text: 'Xác nhận', btnClass: 'btn-success', action: function () {
+                            Table_List_TaiSan_Add.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                                var data = this.data();
+                                var Sl_CanThem = document.getElementsByName("SL_" + data[0])[0].value;
+                                var GhiChu = document.getElementById("GhiChu_" + + data[0]).value;
+                                Them_PhanBo(data[0], MaND_Them_PB, MaPhong, Sl_CanThem, GhiChu);
+
+                            });
+                            setTimeout(function () {
+                                $("#TaiSan").empty();
+                                Table_List_TaiSan_Add.clear().draw();
+                                Table_Info_TaiSan_Theo_Phong.clear().draw(); // xóa table hiển thị ds tài sản theo phòng
+                                Load_Data_DSTaiSan();
+                                Load_Table_ChiTiet_PhanBo(Table_ChiTiet_PhanBo);
+                                $('button[name="Xem_ChiTiet"]').click(function (e) {
+                                    var id_Phong = $(this).attr('id');
+                                    Load_ChiTiet_PhanBo(Table_Show_ChiTiet_PhanBo, id_Phong);
+                                });
+                                //Load_Data_PhanBo_Theo_MaPhong(Table_Info_TaiSan_Theo_Phong, MaPhong);
+                                Load_Data_DSPhong();
+                                ThongBao("Thành công", "Phân bố TS-CDCC thành công !!!");
+                            }, 100);
+
+                        }
+                    },
+                    HuyBo: {
+                        text: 'Hủy bỏ', btnClass: 'btn-warning', action: function () {
+                            ThongBao("Thành công", "Đã hủy bỏ thêm phòng !!!");
+                        }
+                    }
+                }
+            });// end xác nhận thêm
+        } // end if
+    });
+
+
+
+    $("#Huy_Them_PhanBo").click(function () {
+
+        setTimeout(function () {
+            $("#TaiSan").empty();
+            Table_List_TaiSan_Add.clear().draw();
+            Table_Info_TaiSan_Theo_Phong.clear().draw(); // xóa table hiển thị ds tài sản theo phòng
+            Load_Data_DSTaiSan();
+            Load_Data_DSPhong();
+            ThongBao("Thành công", "Đã hủy thêm");
+        }, 100);
+
+    });
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+    function Load_Data_PhanBo_Theo_MaPhong(Name_DataTable, MaPhong) {
+        var Get_DSPB_ByMaPhong = Get_Data_PhanBo_By_MaPhong(MaPhong);
+        Name_DataTable.clear().draw();
+        if (Get_DSPB_ByMaPhong != "Error_Get_Data_PhanBo_By_MaPhong") { // nếu get phân bổ theo mã phòng mà không có lỗi gì thì...
+            $.each(Get_DSPB_ByMaPhong.data, function (i, item) {
+                Name_DataTable.row.add([
+                    "<h4>" + item.MaTS + "</h4>",
+                    '<h4><span class="badge bg-danger text-light">' + item.TenNhomTS + '</span></h4>',
+                    '<h4><span class="badge bg-dark text-light">' + item.TenTS + '</span></h4>',
+                    '<h4><span class="badge bg-light text-dark">' + item.SoLuong + '</span></h4>', item.GhiChu]).draw(false);
+            });
+        } else { // lúc này xãy ra lỗi
+            Name_DataTable.clear().draw();
+        }
+    }
+function Load_Table_ChiTiet_PhanBo(Name_DataTable) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_PhanBo", "TaiSan")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function (data) {
+            var items = '';
+            var iii = 1;
+            $.each(data.data, function (i, item) {
+
+
+                Name_DataTable.row.add([
+                    '<center><h4><span class="badge badge-primary-lighten rounded-pill">' + iii++ + '</span></h3h4center>',
+                    '<center><h4><span class="badge bg-primary text-light">' + item.TenPhong + '</span></h4></center>',
+                    '<center><h4><span class="badge bg-light text-dark">' + item.SoLuong + '</span></h4></center >',
+                    "<p style='font-style: italic;text-align:center;'>" + ToJavaScriptDate(item.NgayTao) + "</p>",
+                    '<p style="text-align:center;"><button type="button" name = "Xem_ChiTiet" id = "'+item.MaPhong+'" class="btn btn-info"><i class="mdi mdi-eye"></i>Xem chi tiết</button></p>'
+
+                ]).draw(false);
+
+
+            });
+        },
+        error: function (ex) {
+            alert("Error_Load_Data");
+        }
+    });
+    return false;
+}
+function Load_ChiTiet_PhanBo(Name_DataTable, MaPhong) {
+    Name_DataTable.clear().draw();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_PhanBo_By_MaPhong", "TaiSan")',
+        data: { MaPhong: MaPhong },
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        cache: false,
+        success: function (data) {
+            var items = '';
+            $.each(data.data, function (i, item) {
+                Name_DataTable.row.add([
+
+                    '<h3><span class="badge badge-primary-lighten rounded-pill">' + item.MaTS +'</span></h3>',
+                    '<h3><span class="badge bg-success text-light">' + item.TenNhomTS + '</span></h3>',
+                    '<h3><span class="badge bg-secondary text-light">' + item.TenTS + '</span></h3>',
+                    '<h3><span class="badge bg-light text-dark">' + item.SoLuong + '</span></h3>',
+                    item.HangSanXuat,
+                    item.NamSanXuat,
+                    item.NuocSanXuat,
+                    item.GhiChu,
+                    ToJavaScriptDate(item.NgayCapNhat)
+
+                ]).draw(false);
+                setTimeout(function () {
+                    $("#modal_chitiet_phanbo").modal("show");
+                }, 100);
+
+            });
+        },
+        error: function (ex) {
+            $("#basic-datatable tbody tr").remove();
+            $("#modal_chitiet_phanbo").modal("hide");
+            alert("Error_Load_Data");
+        }
+    });
+
+}
+
+
+    function Load_Data_DSTaiSan() {
+        var Get_DSTaiSan = Get_Data_DSTaiSan();
+        if (Get_DSTaiSan != "Error_Get_Data_DSTaiSan") {
+            $("#TaiSan").empty();
+            $("#table_add_pb tbody tr").remove();
+            $.each(Get_DSTaiSan.data, function (i, item) {
+                if (item.SoLuong >= 1) // nếu còn mới hiện
+                {
+                    $('#TaiSan').append($('<option>', { value: item.MaTS, text: item.TenTS + " - Số lượng còn lại: " + item.SoLuong }));
+                }
+
+            });
+        }
+    }
+
+
+    function Load_Data_DSPhong() {
+        var Get_DSPhong = Get_Data_DSPhong();
+        if (Get_DSPhong != "Error_Get_Data_DSPhong") {
+            $("#MaPhong").empty();
+            $('#MaPhong').append($('<option>', { value: "Chọn phòng....", text: "Chọn phòng...." }));
+            $.each(Get_DSPhong.data, function (i, item) {
+                $('#MaPhong').append($('<option>', { value: item.MaPhong, text: item.TenPhong }));
+            });
+        }
+    }
+
+
+    function Get_Data_PhanBo_By_MaPhong(MaPhong) {
+        var result = "";
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Select_PhanBo_By_MaPhong", "TaiSan")',
+            data: { MaPhong: MaPhong },
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            async: false,
+            cache: false,
+            success: function (data) {
+                result = data;
+            },
+            error: function (ex) {
+                result = "Error_Get_Data_PhanBo_By_MaPhong";
+            }
+        });
+        return result;
+    }
+
+    function Get_Data_DSPhong() {
+        var result = "";
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Select_Phong", "Phong")',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            async: false,
+            cache: false,
+            success: function(data) {
+                result = data;
+            },
+            error: function(ex) {
+                result = "Error_Get_Data_DSPhong";
+            }
+        });
+        return result;
+    }
+
+    function Get_Data_TaiSan_By_MaPhong(MaTS) {
+        var result = "";
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Select_TaiSan_By_MaTS", "TaiSan")',
+            data: { MaTS: MaTS },
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            async: false,
+            cache: false,
+            success: function (data) {
+                result = data;
+            },
+            error: function (ex) {
+                result = "Error_Get_Data_TaiSan_By_MaPhong";
+            }
+        });
+        return result;
+    }
+
+    function Get_Data_DSTaiSan() {
+        var result = "";
+	    $.ajax({
+		    type: 'GET',
+		    url: '@Url.Action("Select_TaiSan", "TaiSan")',
+		    dataType: 'json',
+		    contentType: 'application/json;charset=utf-8',
+            async: false,
+            cache: false,
+		    success: function(data) {
+                result = data;
+		    },
+		    error: function(ex) {
+                result = "Error_Get_Data_DSTaiSan";
+		    }
+	    });
+        return result;
+    }
+
+
+function Them_PhanBo(MaTS, MaND, MaPhong, SoLuong, GhiChu) {
+    $.ajax({
+        url: '@Url.Action("Insert_PhanBo_SoLuong_One", "TaiSan")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ MaTS: MaTS, MaND: MaND, MaPhong: MaPhong, SoLuong: SoLuong, GhiChu: GhiChu }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+ }
+
+
+
+
+
+    function ThongBao(title, content) {
+        $.alert({
+            title: title,
+            theme: 'dark',
+            content: content,
+        });
+    }
+</script>

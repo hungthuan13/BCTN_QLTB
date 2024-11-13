@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "DangNhap";
+    Layout = null;
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng nhập</title>
+    <link rel="icon" type="image/png" href="~/Content/Hinh/icon_tdmu.png">
+    <link href="~/Content/Content_TrangChu/main.css" rel="stylesheet" />
+    <link href="~/Content/Content_TrangChu/util.css" rel="stylesheet" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(../../Content/Hinh/img-kham-pha-tdmu.jpg); ">
+                <span class="login100-form-title-1">
+                    Đăng Nhập
+                </span>
+            </div>
+            @using (Html.BeginForm("DangNhap","TrangChu"))
+            {
+                @Html.ValidationSummary(true)
+                <div class="login100-form validate-form">
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                        <span class="label-input100">Email</span>
+                        <input class="input100" type="text" name="TenDangNhap" id="TenDangNhap" value="admin" placeholder="Nhập tên đăng nhập">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                        <span class="label-input100">Mật khẩu</span>
+                        <input class="input100" type="password" name="MatKhau" id="MatKhau" value="admin" placeholder="Nhập mật khẩu">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Nhớ mật khẩu
+                            </label>
+                        </div>
+
+                        <div>
+                            <a href="#" class="txt1">
+                                Quên mật khẩu
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Đăng nhập
+                        </button>
+                    </div>
+                    <p style="font-size: 1.2rem; color: red; margin-top: 20px; border-bottom: 1px solid #ccc">@ViewBag.ThongBao</p>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+@*<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+     Modal
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="wrapper " role="document">
+            <form action="#" method="post" class="p-3 mt-3">
+    <button type="button" class="close close__btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="logo">
+                    <img src="~/fonts/img/tdmu-icon-ldpi.png" alt="">
+
+                </div>
+                <div class="text-center mt-4 name">
+                    TDMU
+                </div>
+                <div class="form-field d-flex align-items-center">
+                    <span class="far fa-user"></span>
+                    <input type="text" name="TenDangNhap" id="TenDangNhap">
+                </div>
+                <div class="form-field d-flex align-items-center">
+                    <span class="fas fa-key"></span>
+                    <input type="password" name="MatKhau" id="MatKhau">
+                </div>
+                <button class="btn mt-3">Đăng Nhập</button>
+
+                <div class="text-center fs-6" style="padding: 15px;">
+                    <a href="#">Quên mật khẩu ?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#myModal").modal({
+                backdrop: 'static',
+            });
+        });
+    </script>
+*@
+

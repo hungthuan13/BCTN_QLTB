@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+<!-- ========== Left Sidebar Start ========== -->
+<div class="leftside-menu">
+    <!-- LOGO -->
+    <a href="#" class="logo text-center logo-light">
+        <span class="logo-lg">
+            <img src="~/Content/Content_Admin/assets/images/Logo_TDMU.png" alt="" height="50">
+        </span>
+        <span class="logo-sm">
+            <img src="~/Content/Content_Admin/assets/images/Logo_TDMU.png" alt="" height="61">
+        </span>
+    </a>
+    <!-- LOGO -->
+    <a href="index.html" class="logo text-center logo-dark">
+        <span class="logo-lg">
+            <img src="~/Content/Content_Admin/assets/images/logo-dark.png" alt="" height="16">
+        </span>
+        <span class="logo-sm">
+            <img src="~/Content/Content_Admin/assets/images/logo_sm_dark.png" alt="" height="16">
+        </span>
+    </a>
+    <div class="h-100" id="leftside-menu-container" data-simplebar>
+        <!--- Sidemenu -->
+        <ul class="side-nav">
+            <li class="side-nav-title side-nav-item"><hr /></li>
+            <li class="side-nav-item @ViewBag.ActiveMenu">
+                <a href="@Url.Action("Index","TrangChu")" id="test" class="side-nav-link">
+                    <i class="uil-home-alt"></i>
+                    <span>Trang tổng quan</span>
+                    <span class="badge bg-success float-end">1</span>
+                </a>
+            </li>
+
+            <li class="side-nav-title side-nav-item"><hr /></li>
+            <li class="side-nav-item">
+                <a href="@Url.Action("Index","NguoiDung")" aria-expanded="false" aria-controls="sidebarQLPhong" class="side-nav-link">
+                    <i class="mdi mdi-account-group-outline"></i>
+                    <span>Quản lý người dùng</span>
+                </a>
+            </li>
+
+
+            <li class="side-nav-item">
+                <a href="@Url.Action("Index","Phong")" aria-expanded="false" aria-controls="sidebarQLPhong" class="side-nav-link">
+                    <i class="mdi mdi-dots-square"></i>
+                    <span>Quản lý phòng</span>
+                </a>
+            </li>
+
+
+
+            <li class="side-nav-item">
+                <a href="@Url.Action("Index","TaiSan")" aria-expanded="false" aria-controls="sidebarQLTB" class="side-nav-link">
+                    <i class="mdi mdi-desktop-classic"></i>
+                    <span>Quản lý tài sản</span>
+                </a>
+            </li>
+
+
+
+
+
+
+            <li class="side-nav-title side-nav-item"><hr /></li>
+
+            <!--
+        <li class="side-nav-item">
+            <a href="@Url.Action("XemDanhSachPhanBo","TaiSan")" aria-expanded="false" aria-controls="sidebarDSPB" class="side-nav-link">
+                <i class="dripicons-preview"></i>
+                <span>Xem danh sách phân bố</span>
+            </a>
+        </li>
+    -->
+
+            <li class="side-nav-item">
+                <a href="@Url.Action("PhanBoThietBi","TaiSan")" class="side-nav-link">
+                    <i class="dripicons-suitcase"></i>
+                    <span>Phân bố tài sản</span>
+                </a>
+            </li>
+
+            <!--
+    <li class="side-nav-item">
+        <a href="@Url.Action("DieuChuyenThietBi","TaiSan")" class="side-nav-link">
+            <i class="mdi mdi-transfer"></i>
+            <span>Điều chuyển tài sản</span>
+        </a>
+    </li>
+            -->
+            <li class="side-nav-title side-nav-item mt-1"><hr /></li>
+
+            <li class="side-nav-item">
+                <a href="@Url.Action("Index","KiemKe")" class="side-nav-link">
+                    <i class="mdi mdi-book-edit-outline"></i>
+                    <span>Kiểm kê</span>
+                </a>
+            </li>
+
+            <li class="side-nav-title side-nav-item mt-1"><hr /></li>
+
+            <li class="side-nav-item">
+                <a href="@Url.Action("Index","NhatKyHoatDong")" class="side-nav-link">
+                    <i class="dripicons-blog"></i>
+                    <span>Nhật ký hoạt động</span>
+                </a>
+            </li>
+
+        </ul>
+    <!-- End Sidebar -->
+            <div class="clearfix"></div>
+</div>
+    <!-- Sidebar -left -->
+
+</div>
+<!-- Left Sidebar End -->
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->

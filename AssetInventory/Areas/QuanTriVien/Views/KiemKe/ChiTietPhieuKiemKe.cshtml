@@ -1,0 +1,428 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết phiếu kiểm kê";
+    Layout = "~/Areas/QuanTriVien/Views/Shared/_LayoutQuanTriVien.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <center>
+                    <p style="color: yellow; font-weight: bold; font-size: 20px;" class="header-title">Thông tin chi tiết phiếu kiểm kê</p>
+                </center>
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        <button type="button" id ="HoanThanh" class="btn btn-success">Hoàn tất kiểm kê</button>
+                        <button type="button" id ="Luu" class="btn btn-primary">Lưu tạm thời</button>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-sm-end">
+                            <a href="@Url.Action("Index","KiemKe")" class="btn btn-info mb-2"><i class="mdi mdi-backup-restore me-2"></i> Quay lại trang kiểm kê</a>
+                            </div>
+                        </div>
+                    </div>
+                <ul class="nav nav-tabs nav-bordered mb-3">
+                    <li class="nav-item">
+                        <a href="#chitiet_phieukiem" data-bs-toggle="tab" aria-expanded="false" class="nav-link active"> Chi tiết tài sản </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#ban_kiem_ke" data-bs-toggle="tab" aria-expanded="true" class="nav-link"> Ban kiểm kê </a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="chitiet_phieukiem">
+
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <table id="table_show_chitiet_phieukiem" class="table table-bordered dt-responsive ">
+                                            <thead>
+                                                <tr style="text-align:center">
+                                                    <th style="width: 100px;">Mã CTPKK</th>
+                                                    <th style="width: 200px;">Thuộc nhóm tài sản</th>
+                                                    <th style="width: 100px;">Tên tài sản</th>
+                                                    <th style="width: 100px;">Số lượng</th>
+                                                    <th style="width: 130px;">Số lượng kiểm kê</th>
+                                                    <th style="width: 150px;">Còn tốt</th>
+                                                    <th style="width: 150px;"> Kém phẩm chất</th>
+                                                    <th style="width: 150px;">Mất phẩm chất</th>
+                                                    <th style="width: 250px;">Ghi chú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align: center;"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div class="tab-pane show" id="ban_kiem_ke">
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và tên: </label>
+                                    <input type="text" id="HoVaTen" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Chọn đơn vị: </label>
+                                    <select id="DonVi" class="form-control select2" data-toggle="select2">
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Chức vụ: </label>
+                                    <input type="text" id="ChucVu" class="form-control">
+                                </div>
+
+                                <div style="text-align:center" class="mb-3">
+                                    <button type="button" id="XacNhan_Them_DonVi" class="btn btn-success">Xác nhận thêm</button>
+                                    <button type="button" id="Huy_Them_DonVi" class="btn btn-danger">Hủy thêm</button>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+
+                                <div class="table-responsive">
+                                    <table id="table_bankiemke" class="table table-bordered dt-responsive nowrap w-100">
+                                        <thead>
+                                            <tr style="text-align: center; font-size: 13px;">
+                                                <th>STT</th>
+                                                <th>Họ và tên</th>
+                                                <th>Đơn vị</th>
+                                                <th>Chức vụ</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align: center;">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                     </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+$(document).ready(function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const MaPhieu = urlParams.get('MaPhieu');
+    var MaDonVi = "";
+
+    var Table_CTPKK = $('#table_show_chitiet_phieukiem').DataTable({
+        scrollY: "620px",
+        scrollCollapse: true,
+        "ordering": false,
+        responsive: true,
+        paging: false,
+    });
+
+    var Table_BKK = $('#table_bankiemke').DataTable({
+        bFilter: false,
+        bInfo: false,
+        "ordering": false,
+        responsive: true,
+        paging: false,
+    });
+
+
+    Show_ChiTietPhieuKiem(Table_CTPKK, MaPhieu);
+    Show_BanKiemKe(Table_BKK, MaPhieu);
+    Load_Data_DSDonVi();
+
+
+
+
+
+    $("#Luu").click(function () {
+
+        if (MaPhieu == "") {
+            ThongBao("Thông báo", "Có lỗi ở mã phiếu");
+        } else {
+        Table_CTPKK.rows().every(function (rowIdx, tableLoop, rowLoop) {
+            var data = this.data();
+            var MaCTPKK = data[0].match("<h5>#(.*?)</h5>")[1];
+            var SL = data[3].match('<h4><span class="badge bg-light text-dark">(.*?)</span></h4>')[1];
+            var SL_TT = $("#slthucte_" + MaCTPKK).val();
+            var ConTot = $("#contot_" + MaCTPKK).val();
+            var KemPC = $("#kempc_" + MaCTPKK).val();
+            var MatPC = $("#matpc_" + MaCTPKK).val();
+            var GhiChu = $("#ghichu_" + MaCTPKK).val();
+
+            if ((Number(ConTot) + Number(KemPC) + Number(MatPC)) <= Number(SL) && Number(SL_TT) <= Number(SL)) {
+                Update_ChiTiet_PhieuKiem(MaPhieu, MaCTPKK, SL_TT, ConTot, KemPC, MatPC, GhiChu);
+            }
+        });
+            Show_ChiTietPhieuKiem(Table_CTPKK, MaPhieu);
+            ThongBao("Thông báo", "Lưu thành công!!!");
+
+
+        } // end if
+    });
+
+
+
+$(document).on('click', "button[id='HoanThanh']", function () {
+        $.ajax({
+        url: '@Url.Action("Update_PhieuKiemKe_HoanTat", "KiemKe")',
+            type: 'POST',
+            data: { MaPhieu: MaPhieu },
+            success: function (data) {
+            if (data.code == 1) {
+                window.location.href = '@Url.Action("Index","KiemKe")';
+            } else {
+                ThongBao("Thông báo", data.msg);
+            }
+        }
+    });
+})
+
+$(document).on('click', "button[name='Delete_BKK']", function () {
+        var id_BKK = $(this).attr('id');
+        $.ajax({
+        url: '@Url.Action("Delete_BanKiemKe", "BanKiemKe")',
+        type: 'POST',
+        data: { MaBanKiemKe: id_BKK},
+        success: function (data) {
+            if (data.code == 1) {
+                Show_BanKiemKe(Table_BKK, MaPhieu);
+                ThongBao("Thông báo", "Xóa ban kiểm kê thành công");
+            } else {
+                ThongBao("Thông báo", data.msg);
+            }
+        }
+    });
+})
+
+    $('#DonVi').on('select2:select', function (e) {
+        var data = e.params.data;
+        if (data.id != "Chọn phòng....") { // nếu click khác "chọn phòng...." thì mới hiển thị ds tài sản
+            MaDonVi = data.id;
+        }
+    });
+
+
+    $("#XacNhan_Them_DonVi").click(function () {
+
+        if (MaDonVi == "") {
+            ThongBao("Thông báo", "Vui lòng chọn mã đơn vị");
+        } else {
+
+            var HoVaTen = $("#HoVaTen").val();
+            var ChucVu = $("#ChucVu").val();
+
+            Them_DonVi(MaPhieu, MaDonVi, HoVaTen, ChucVu);
+            Show_BanKiemKe(Table_BKK, MaPhieu);
+            ThongBao("Thông báo", "Thêm đơn vị thành công");
+        } // end if
+    });
+
+
+
+
+});
+
+
+
+
+
+function Load_Data_DSDonVi() {
+    var Get_DSDonVi = Get_Data_DonVi();
+    if (Get_DSDonVi != "Error_Get_Data_DSTaiSan") {
+        $("#DonVi").empty();
+        $('#DonVi').append($('<option>', { value: "Chọn đơn vị....", text: "Chọn đơn vị...." }));
+        $.each(Get_DSDonVi.data, function (i, item) {
+            $('#DonVi').append($('<option>', { value: item.MaDV, text: item.TenDV }));
+        });
+    }
+}
+
+function Show_BanKiemKe(Name_DataTable, MaPhieu) {
+    var iii = 1;
+    var Get_BanKK = Get_Data_BanKiemKe(MaPhieu);
+    Name_DataTable.clear().draw();
+    if (Get_BanKK != "Error_Get_Data_CTPhieuKiem") {
+        $.each(Get_BanKK.data, function (i, item) {
+            Name_DataTable.row.add([
+                "<h5>#" + iii++ + "</h5>",
+                '<h4><span class="badge bg-warning text-light">' + item.HoVaTen + '</span></h4>',
+                item.TenDV,
+                item.ChucVu,
+                '<button type="button" name="Delete_BKK" id="' + item.MaBanKiemKe + '" class="btn btn-danger"><i class="mdi mdi-delete"></i>Xóa</button>'
+            ]).draw(false);
+        });
+    } else {
+        Name_DataTable.clear().draw();
+    }
+}
+
+
+function Show_ChiTietPhieuKiem(Name_DataTable, MaPhieu) {
+    var Get_CTPhieuKiem = Get_Data_CTPhieuKiem(MaPhieu);
+    Name_DataTable.clear().draw();
+    if (Get_CTPhieuKiem != "Error_Get_Data_CTPhieuKiem") {
+        $.each(Get_CTPhieuKiem.data, function (i, item) {
+            Name_DataTable.row.add([
+                "<h5>#" + item.MaCTPKK + "</h5>",
+                '<h4><span class="badge bg-danger text-light">' + item.TenNhomTS + '</span></h4>',
+                '<h4><span class="badge bg-dark text-light">' + item.TenTS + '</span></h4>',
+                '<h4><span class="badge bg-light text-dark">' + item.SoLuong + '</span></h4>',
+                '<input class="form-control"    id="slthucte_' + item.MaCTPKK + '" value = "' + item.SoLuongThucTe + '" min = "0" max = "'+ item.SoLuong + '" type="number" name="number">',
+                '<input class="form-control"    id="contot_' + item.MaCTPKK + '" value = "' + item.ConTot + '" min = "0" max = "' + item.SoLuong + '" type="number" name="number">',
+                '<input class="form-control"    id="kempc_' + item.MaCTPKK + '"  value = "' + item.KemPC + '" min = "0" max = "' + item.SoLuong + '" type="number" name="number">',
+                '<input class="form-control"    id="matpc_' + item.MaCTPKK + '"  value = "' + item.MatPC + '" min = "0" max = "' + item.SoLuong + '" type="number" name="number">',
+                '<textarea class="form-control" id="ghichu_' + item.MaCTPKK + '" rows="5">' + item.GhiChu + '</textarea>',
+
+
+            ]).draw(false);
+        });
+    } else {
+        Name_DataTable.clear().draw();
+    }
+}
+
+function Get_Data_CTPhieuKiem(MaPhieu) {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_ChiTietPhieuKiemKe", "KiemKe")',
+        dataType: 'json',
+        data: { MaPhieu: MaPhieu },
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_CTPhieuKiem";
+        }
+    });
+    return result;
+}
+
+function Get_Data_BanKiemKe(MaPhieu) {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_BanKiemKe", "BanKiemKe")',
+        dataType: 'json',
+        data: { MaPhieu: MaPhieu },
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_BanKiemKe";
+        }
+    });
+    return result;
+}
+
+
+function Get_Data_DonVi() {
+    var result = "";
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Select_DonVi", "DonVi")',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8',
+        async: false,
+        cache: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(ex) {
+            result = "Error_Get_Data_DonVi";
+        }
+    });
+    return result;
+}
+
+
+function Update_ChiTiet_PhieuKiem(MaPhieu, MaCTPKK, SoLuongTT, ConTot, KemPC, MatPC, GhiChu) {
+    var rt = false;
+    $.ajax({
+        url: '@Url.Action("Update_ChiTiet_PhieuKiemKe", "KiemKe")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ MaPhieu: MaPhieu, MaCTPKK: MaCTPKK, SoLuongThucTe: SoLuongTT, ConTot: ConTot, KemPC: KemPC, MatPC: MatPC, GhiChu: GhiChu }),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+ }
+
+function Them_DonVi(MaPhieu, MaDV, HoVaTen, ChucVu) {
+        var rt = false;
+    $.ajax({
+        url: '@Url.Action("Insert_BanKiemKe", "BanKiemKe")',
+        dataType: "json",
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ MaPhieu: MaPhieu, MaDV: MaDV, HoVaTen: HoVaTen, ChucVu: ChucVu}),
+        async: false,
+        cache: false,
+        success: function (data) {
+            if (data.code == true) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        },
+        error: function (xhr) {
+            alert("Error_Load_Data");
+        }
+    })
+    return rt;
+ }
+    function ThongBao(title, content) {
+        $.alert({
+            title: title,
+            theme: 'dark',
+            content: content,
+        });
+    }
+</script>
